@@ -35,8 +35,12 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/ArgumentParser.h" />
+		<Unit filename="include/Computer.h" />
+		<Unit filename="include/Memory.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ArgumentParser.cpp" />
+		<Unit filename="src/Computer.cpp" />
+		<Unit filename="src/Memory.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

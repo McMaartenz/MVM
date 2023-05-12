@@ -1,14 +1,44 @@
 # depslib dependency file v1.0
-1683915187 source:d:\git\repos\mvm\main.cpp
+1683922757 source:d:\git\repos\mvm\main.cpp
 	<iostream>
 	<cstdlib>
+	<filesystem>
+	"ArgumentParser.h"
+	"Computer.h"
+
+1683917111 source:d:\git\repos\mvm\src\argumentparser.cpp
 	"ArgumentParser.h"
 
-1683915358 source:d:\git\repos\mvm\src\argumentparser.cpp
-	"ArgumentParser.h"
-
-1683915249 d:\git\repos\mvm\include\argumentparser.h
+1683917043 d:\git\repos\mvm\include\argumentparser.h
 	<iostream>
 	<algorithm>
 	<cstring>
+
+1683920866 source:d:\git\repos\mvm\src\computer.cpp
+	"Computer.h"
+
+1683920861 d:\git\repos\mvm\include\computer.h
+	"Memory.h"
+	"Disk.h"
+
+1683919534 d:\git\repos\mvm\include\memory.h
+	<cstdint>
+
+1683918337 d:\git\repos\mvm\include\port.h
+
+1683918338 source:d:\git\repos\mvm\src\port.cpp
+	"Port.h"
+
+1683919453 source:d:\git\repos\mvm\src\memory.cpp
+	"Memory.h"
+
+1683922308 d:\git\repos\mvm\include\disk.h
+	<filesystem>
+	<iostream>
+	<fstream>
+	<string>
+	<stdexcept>
+
+1683922667 source:d:\git\repos\mvm\src\disk.cpp
+	"Disk.h"
 
