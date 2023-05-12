@@ -36,6 +36,7 @@ int main(int argc, char** argv)
 
 	Disk disk_file(disk_file_path);
 	Computer computer(memory_size, &disk_file);
+	computer.boot();
 
 	return EXIT_SUCCESS;
 }

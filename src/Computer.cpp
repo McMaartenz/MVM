@@ -14,5 +14,5 @@ Computer::~Computer()
 void Computer::boot() {
 	IP = 0x0000;
 
-
+	disk_file->readMany(0, memory->data, 0x200);
 }
