@@ -1,4 +1,14 @@
 # depslib dependency file v1.0
-1584209020 source:d:\git\repos\mvm\main.cpp
+1683915187 source:d:\git\repos\mvm\main.cpp
 	<iostream>
+	<cstdlib>
+	"ArgumentParser.h"
+
+1683915358 source:d:\git\repos\mvm\src\argumentparser.cpp
+	"ArgumentParser.h"
+
+1683915249 d:\git\repos\mvm\include\argumentparser.h
+	<iostream>
+	<algorithm>
+	<cstring>
 
