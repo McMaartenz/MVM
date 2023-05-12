@@ -1,0 +1,14 @@
+# bin/obj
+bin/
+obj/
+
+# executables
+*.exe
+*.o
+*.obj
+*.dll
+
+
+# executable info
+*.pdb
+
