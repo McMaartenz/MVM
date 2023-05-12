@@ -25,6 +25,15 @@ std::string ArgumentParser::Parser::flag_value(const char* name) const {
 	return arg_iter[1];
 }
 
+int ArgumentParser::Parser::flag_ivalue(const char* name, int default_value) const {
+	try {
+		return std::stoi(flag_value(name));
+	}
+	catch (std::invalid_argument const&) {
+		return default_value;
+	}
+}
+
 ArgumentParser::Parser* ArgumentParser::Initialize(int argc, char** argv) {
 	return new Parser(argc, argv);
 }
