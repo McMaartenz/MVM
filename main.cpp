@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
 
 	// Flag settings loading
 
-	int memory_size = args->flag_ivalue("-m", 512); // Memory size
+	int memory_size = args->flag_ivalue("-m", 1024); // Memory size
 	std::string disk_file_path = args->flag_value("-f"); // Disk file
 
 	bool use_serial = args->has_flag("-s"); // Use serial
