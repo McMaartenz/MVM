@@ -12,3 +12,7 @@ obj/
 # executable info
 *.pdb
 
+# backups
+.bak
+.bac
+
