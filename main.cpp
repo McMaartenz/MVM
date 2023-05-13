@@ -5,8 +5,7 @@
 #include "ArgumentParser.h"
 #include "Computer.h"
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
 	ArgumentParser::Parser* args = ArgumentParser::Initialize(argc, argv);
 
 	std::cout << "Hello, World!\n";

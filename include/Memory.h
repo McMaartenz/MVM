@@ -3,17 +3,16 @@
 
 #include <cstdint>
 
-class Memory
-{
-	public:
-		Memory(uint32_t memory_size = 512);
-		virtual ~Memory();
+class Memory {
+  public:
+	Memory(uint32_t memory_size = 512);
+	virtual ~Memory();
 
-		uint8_t* data;
+	uint8_t* data;
 
-	protected:
+  protected:
 
-	private:
+  private:
 };
 
 #endif // MEMORY_H

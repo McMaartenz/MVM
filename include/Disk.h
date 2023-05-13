@@ -8,22 +8,21 @@
 
 #include <stdexcept>
 
-class Disk
-{
-	public:
-		Disk(std::string path);
-		virtual ~Disk();
+class Disk {
+  public:
+	Disk(std::string path);
+	virtual ~Disk();
 
-		void write(uint32_t offset, uint8_t value);
-		uint8_t read(uint32_t offset);
+	void write(uint32_t offset, uint8_t value);
+	uint8_t read(uint32_t offset);
 
-		void writeMany(uint32_t offset, const uint8_t* buffer, uint32_t count);
-		void readMany(uint32_t offset, uint8_t* buffer, uint32_t count);
+	void writeMany(uint32_t offset, const uint8_t* buffer, uint32_t count);
+	void readMany(uint32_t offset, uint8_t* buffer, uint32_t count);
 
-	protected:
+  protected:
 
-	private:
-		std::fstream stream;
+  private:
+	std::fstream stream;
 };
 
 #endif // DISK_H

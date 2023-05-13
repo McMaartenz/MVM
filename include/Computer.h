@@ -5,27 +5,26 @@
 #include "Disk.h"
 #include "Opcodes.h"
 
-class Computer
-{
-	public:
-		Memory* memory;
-		Disk* disk_file;
+class Computer {
+  public:
+	Memory* memory;
+	Disk* disk_file;
 
-		bool running;
+	bool running;
 
-		// Registers
-		uint32_t IP;
-		uint32_t SP;
+	// Registers
+	uint32_t IP;
+	uint32_t SP;
 
-		Computer(uint32_t memory_size, Disk* disk);
-		virtual ~Computer();
+	Computer(uint32_t memory_size, Disk* disk);
+	virtual ~Computer();
 
-		void boot();
-		void tick();
+	void boot();
+	void tick();
 
-	protected:
+  protected:
 
-	private:
+  private:
 };
 
 #endif // COMPUTER_H

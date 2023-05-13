@@ -1,12 +1,10 @@
 #include "Computer.h"
 
-Computer::Computer(uint32_t memory_size, Disk* disk) : disk_file(disk)
-{
+Computer::Computer(uint32_t memory_size, Disk* disk) : disk_file(disk) {
 	memory = new Memory(memory_size);
 }
 
-Computer::~Computer()
-{
+Computer::~Computer() {
 	//dtor
 }
 
@@ -25,37 +23,37 @@ void Computer::tick() {
 	Opcodes::Parser parser(first_byte);
 
 	switch (parser.opcode) {
-		case MOV: {
-			std::cout << "MOV!\n";
-			break;
-		}
+	case MOV: {
+		std::cout << "MOV!\n";
+		break;
+	}
 
-		case HLT: {
-			running = false;
-			return;
-		}
+	case HLT: {
+		running = false;
+		return;
+	}
 	}
 
 	// Jump should skip this!
 	switch (parser.selection) {
-		case Opcodes::no_arguments: {
-			IP += 1;
-			break;
-		}
+	case Opcodes::no_arguments: {
+		IP += 1;
+		break;
+	}
 
-		case Opcodes::reg_reg:
-		case Opcodes::just_im8:
-		case Opcodes::just_reg:
-		case Opcodes::just_mem: {
-			IP += 2;
-			break;
-		}
+	case Opcodes::reg_reg:
+	case Opcodes::just_im8:
+	case Opcodes::just_reg:
+	case Opcodes::just_mem: {
+		IP += 2;
+		break;
+	}
 
-		case Opcodes::reg_mem:
-		case Opcodes::mem_reg:
-		case Opcodes::reg_im8: {
-			IP += 3;
-			break;
-		}
+	case Opcodes::reg_mem:
+	case Opcodes::mem_reg:
+	case Opcodes::reg_im8: {
+		IP += 3;
+		break;
+	}
 	}
 }
