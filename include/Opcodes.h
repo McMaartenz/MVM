@@ -5,7 +5,9 @@
 
 enum Opcode {
 	MOV,
-	HLT
+	HLT,
+	IN,
+	OUT
 };
 
 namespace Opcodes {

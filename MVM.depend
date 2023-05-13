@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1683970832 source:d:\git\repos\mvm\main.cpp
+1683976359 source:d:\git\repos\mvm\main.cpp
 	<iostream>
 	<cstdlib>
 	<filesystem>
@@ -17,12 +17,12 @@
 1683975496 source:d:\git\repos\mvm\src\computer.cpp
 	"Computer.h"
 
-1683971777 d:\git\repos\mvm\include\computer.h
+1683975935 d:\git\repos\mvm\include\computer.h
 	"Memory.h"
 	"Disk.h"
 	"Opcodes.h"
 
-1683919534 d:\git\repos\mvm\include\memory.h
+1683975844 d:\git\repos\mvm\include\memory.h
 	<cstdint>
 
 1683918337 d:\git\repos\mvm\include\port.h
@@ -30,10 +30,10 @@
 1683918338 source:d:\git\repos\mvm\src\port.cpp
 	"Port.h"
 
-1683919453 source:d:\git\repos\mvm\src\memory.cpp
+1683975920 source:d:\git\repos\mvm\src\memory.cpp
 	"Memory.h"
 
-1683922308 d:\git\repos\mvm\include\disk.h
+1683975928 d:\git\repos\mvm\include\disk.h
 	<filesystem>
 	<iostream>
 	<fstream>
@@ -43,9 +43,9 @@
 1683922667 source:d:\git\repos\mvm\src\disk.cpp
 	"Disk.h"
 
-1683974885 d:\git\repos\mvm\include\opcodes.h
+1683981717 d:\git\repos\mvm\include\opcodes.h
 	<cstdint>
 
-1683974907 source:d:\git\repos\mvm\src\opcodes.cpp
+1683975944 source:d:\git\repos\mvm\src\opcodes.cpp
 	"Opcodes.h"
 

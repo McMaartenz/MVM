@@ -20,11 +20,22 @@ void Computer::boot() {
 
 void Computer::tick() {
 	uint8_t first_byte = memory->data[IP];
+	uint8_t second_byte = memory->data[IP + 1];
 	Opcodes::Parser parser(first_byte);
 
 	switch (parser.opcode) {
 	case MOV: {
 		std::cout << "MOV!\n";
+		break;
+	}
+
+	case OUT: {
+		std::cout << "OUT\n";
+		break;
+	}
+
+	case IN: {
+		std::cout << "IN\n";
 		break;
 	}
 
