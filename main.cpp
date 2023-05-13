@@ -38,5 +38,11 @@ int main(int argc, char** argv)
 	Computer computer(memory_size, &disk_file);
 	computer.boot();
 
+	while (computer.running) {
+		computer.tick();
+	}
+
+	std::cout << "Computer is no longer running\n";
+
 	return EXIT_SUCCESS;
 }

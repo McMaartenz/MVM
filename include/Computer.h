@@ -3,12 +3,15 @@
 
 #include "Memory.h"
 #include "Disk.h"
+#include "Opcodes.h"
 
 class Computer
 {
 	public:
 		Memory* memory;
 		Disk* disk_file;
+
+		bool running;
 
 		// Registers
 		uint32_t IP;
@@ -18,6 +21,7 @@ class Computer
 		virtual ~Computer();
 
 		void boot();
+		void tick();
 
 	protected:
 
