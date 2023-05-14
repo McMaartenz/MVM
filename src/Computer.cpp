@@ -160,3 +160,25 @@ void Computer::set_operand_2(const Opcodes::Parser& parser, uint8_t value) {
 		throw std::logic_error("Unknown type");
 	}
 }
+
+uint8_t& Computer::get_register(uint8_t register_number) {
+	std::map<uint8_t, uint8_t*> register_mapping = {
+		{0b0000, &IPL},
+		{0b0001, &IPH},
+		{0b0010, &SPL},
+		{0b0011, &SPH},
+		{0b0100, &AL},
+		{0b0101, &AH},
+		{0b0110, &BL},
+		{0b0111, &BH},
+		{0b1000, &CL},
+		{0b1001, &CH},
+		{0b1010, &DL},
+		{0b1011, &DH},
+		{0b1100, &EL},
+		{0b1101, &EH},
+		{0b1110, &Flags} // TODO: 0b1111 not implemented deliberately
+	};
+
+	return *register_mapping[register_number];
+}

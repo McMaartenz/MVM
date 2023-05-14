@@ -13,22 +13,27 @@ class Computer {
 	bool running;
 
 	// Registers
-	uint16_t IP; // IP, IPL(ow), IPH(igh)
-	uint16_t SP; // SP, SPL, SPH
-	uint16_t AX; // AX, AL, AH
-	uint16_t BX; // BX, BL, BH
-	uint8_t C;
-	uint8_t D;
-	uint8_t E;
+	union { uint16_t IP; struct { uint8_t IPL; uint8_t IPH; }; }; // IPL(ow), IPH(igh)
+	union { uint16_t SP; struct { uint8_t SPL; uint8_t SPH; }; }; // SPL, SPH
+	union { uint16_t AX; struct { uint8_t AL; uint8_t AH; }; }; // AL, AH
+	union { uint16_t BX; struct { uint8_t BL; uint8_t BH; }; }; // BL, BH
+	union { uint16_t CX; struct { uint8_t CL; uint8_t CH; }; }; // CL, CH
+	union { uint16_t DX; struct { uint8_t DL; uint8_t DH; }; }; // DL, DH
+	union { uint16_t EX; struct { uint8_t EL; uint8_t EH; }; }; // EL, EH
 
-	struct Flags { // 5/8 flags
-		uint8_t ZF : 1;
-		uint8_t CF : 1;
-		uint8_t SF : 1;
-		uint8_t OF : 1;
-		uint8_t IF : 1;
-		uint8_t Unused : 3;
+	union {
+		uint8_t Flags;
+		struct { // 5/8 flags
+			uint8_t ZF : 1;
+			uint8_t CF : 1;
+			uint8_t SF : 1;
+			uint8_t OF : 1;
+			uint8_t IF : 1;
+			uint8_t Unused : 3;
+		};
 	};
+
+	// TODO: Flag for 16th
 
 	Computer(uint32_t memory_size, Disk* disk);
 	virtual ~Computer();
@@ -45,6 +50,8 @@ class Computer {
 
   	void set_operand_1(const Opcodes::Parser& parser, uint8_t value);
   	void set_operand_2(const Opcodes::Parser& parser, uint8_t value);
+
+  	uint8_t& get_register(uint8_t register_number);
 };
 
 #endif // COMPUTER_H
