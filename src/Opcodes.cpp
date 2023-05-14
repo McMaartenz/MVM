@@ -6,6 +6,21 @@ Parser::Parser(uint8_t first_byte) {
 	opcode = (Opcode)(first_byte >> 4);
 	relative_address = first_byte & 0b1;
 	length = instruction_length(selection);
+
+	std::map<Selection, std::tuple<Type,Type>> types_mapping = {
+		{reg_reg, {Register, Register}},
+		{reg_im8, {Register, Constant}},
+		{mem_reg, {Address, Register}},
+		{reg_mem, {Register, Address}},
+		{no_arguments, {Empty, Empty}},
+		{just_reg, {Register, Empty}},
+		{just_mem, {Address, Empty}},
+		{just_im8, {Constant, Empty}}
+	};
+
+	auto types = types_mapping[selection];
+	operand_1 = std::get<0>(types);
+	operand_2 = std::get<1>(types);
 }
 
 Parser::~Parser() {

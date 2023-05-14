@@ -25,6 +25,12 @@ class Computer {
   protected:
 
   private:
+  	/* operand from memory/register/constant */
+  	uint8_t get_operand_1(const Opcodes::Parser& parser);
+  	uint8_t get_operand_2(const Opcodes::Parser& parser);
+
+  	void set_operand_1(const Opcodes::Parser& parser, uint8_t value);
+  	void set_operand_2(const Opcodes::Parser& parser, uint8_t value);
 };
 
 #endif // COMPUTER_H

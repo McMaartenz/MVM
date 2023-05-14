@@ -3,6 +3,8 @@
 
 #include <cstdint>
 #include <stdexcept>
+#include <tuple>
+#include <map>
 
 enum Opcode {
 	MOV,
@@ -26,6 +28,14 @@ enum Selection {
 
 class Parser {
   public:
+	enum Type {
+		Empty,
+		Register,
+		Address,
+		Constant
+	};
+
+  public:
 	Selection selection;
 	Opcode opcode;
 	uint8_t operand;
@@ -34,6 +44,9 @@ class Parser {
 
 	uint8_t register_1;
 	uint8_t register_2;
+
+	Type operand_1;
+	Type operand_2;
 
 	Parser(uint8_t first_byte);
 	virtual ~Parser();

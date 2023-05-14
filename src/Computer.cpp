@@ -72,3 +72,91 @@ void Computer::tick() {
 	// Jump should skip this!
 	IP += parser->length;
 }
+
+uint8_t Computer::get_operand_1(const Opcodes::Parser& parser) {
+	using namespace Opcodes;
+
+	switch (parser.operand_1) {
+	case Parser::Register:
+		// dont have em
+		throw std::logic_error("Not implemented");
+
+	case Parser::Address:
+		return memory->get(parser.operand);
+
+	case Parser::Constant:
+		return parser.operand;
+
+	case Parser::Empty:
+		throw std::logic_error("Cannot fetch empty operand");
+
+	default:
+		throw std::logic_error("Unknown type");
+	}
+}
+
+uint8_t Computer::get_operand_2(const Opcodes::Parser& parser) {
+	using namespace Opcodes;
+
+	switch (parser.operand_2) {
+	case Parser::Register:
+		// dont have em
+		throw std::logic_error("Not implemented");
+
+	case Parser::Address:
+		return memory->get(parser.operand);
+
+	case Parser::Constant:
+		return parser.operand;
+
+	case Parser::Empty:
+		throw std::logic_error("Cannot fetch empty operand");
+
+	default:
+		throw std::logic_error("Unknown type");
+	}
+}
+
+void Computer::set_operand_1(const Opcodes::Parser& parser, uint8_t value) {
+	using namespace Opcodes;
+
+	switch (parser.operand_1) {
+	case Parser::Register:
+		// dont have em
+		throw std::logic_error("Not implemented");
+
+	case Parser::Address:
+		return memory->set(parser.operand, value);
+
+	case Parser::Constant:
+		throw std::logic_error("Cannot write to a constant literal");
+
+	case Parser::Empty:
+		throw std::logic_error("Cannot write to an empty operand");
+
+	default:
+		throw std::logic_error("Unknown type");
+	}
+}
+
+void Computer::set_operand_2(const Opcodes::Parser& parser, uint8_t value) {
+	using namespace Opcodes;
+
+	switch (parser.operand_2) {
+	case Parser::Register:
+		// dont have em
+		throw std::logic_error("Not implemented");
+
+	case Parser::Address:
+		return memory->set(parser.operand, value);
+
+	case Parser::Constant:
+		throw std::logic_error("Cannot write to a constant literal");
+
+	case Parser::Empty:
+		throw std::logic_error("Cannot write to an empty operand");
+
+	default:
+		throw std::logic_error("Unknown type");
+	}
+}
