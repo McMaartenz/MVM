@@ -82,7 +82,7 @@ uint8_t Computer::get_operand_1(const Opcodes::Parser& parser) {
 		throw std::logic_error("Not implemented");
 
 	case Parser::Address:
-		return memory->get(parser.operand);
+		return memory->get(parser.address);
 
 	case Parser::Constant:
 		return parser.operand;
@@ -104,7 +104,7 @@ uint8_t Computer::get_operand_2(const Opcodes::Parser& parser) {
 		throw std::logic_error("Not implemented");
 
 	case Parser::Address:
-		return memory->get(parser.operand);
+		return memory->get(parser.address);
 
 	case Parser::Constant:
 		return parser.operand;
@@ -126,7 +126,7 @@ void Computer::set_operand_1(const Opcodes::Parser& parser, uint8_t value) {
 		throw std::logic_error("Not implemented");
 
 	case Parser::Address:
-		return memory->set(parser.operand, value);
+		return memory->set(parser.address, value);
 
 	case Parser::Constant:
 		throw std::logic_error("Cannot write to a constant literal");
@@ -148,7 +148,7 @@ void Computer::set_operand_2(const Opcodes::Parser& parser, uint8_t value) {
 		throw std::logic_error("Not implemented");
 
 	case Parser::Address:
-		return memory->set(parser.operand, value);
+		return memory->set(parser.address, value);
 
 	case Parser::Constant:
 		throw std::logic_error("Cannot write to a constant literal");

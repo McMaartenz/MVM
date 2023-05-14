@@ -1,7 +1,7 @@
 #include "Opcodes.h"
 
 namespace Opcodes {
-Parser::Parser(uint8_t first_byte) {
+Parser::Parser(uint8_t first_byte) : address(operand) {
 	selection = get_selection(first_byte);
 	opcode = (Opcode)(first_byte >> 4);
 	relative_address = first_byte & 0b1;

@@ -38,7 +38,10 @@ class Parser {
   public:
 	Selection selection;
 	Opcode opcode;
+
 	uint8_t operand;
+	uint8_t& address;
+
 	bool relative_address;
 	uint32_t length;
 
