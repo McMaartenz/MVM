@@ -15,13 +15,26 @@ void Computer::boot() {
 
 	running = true;
 
-	disk_file->readMany(0, memory->data, 0x200);
+	uint8_t buffer[512]; // = 0x200
+	disk_file->read_many(0, buffer, 0x200);
+	memory->write_buffer(0, buffer, 0x200);
 }
 
 void Computer::tick() {
-	uint8_t first_byte = memory->data[IP];
-	uint8_t second_byte = memory->data[IP + 1];
-	Opcodes::Parser parser(first_byte);
+	uint8_t byte_1, byte_2, byte_3;
+
+	try {
+		byte_1 = memory->get(IP);     // Opcode and options
+		byte_2 = memory->get(IP + 1); // Registers, constant, or empty
+		byte_3 = memory->get(IP + 2); // Constant or empty
+	} catch(std::exception e) {
+		// TODO: Throw BUS error interrupt
+		std::cout << "BUS error thrown at IP=" << std::hex << IP << std::endl;
+		running = false;
+		return;
+	}
+
+	Opcodes::Parser parser(byte_1);
 
 	switch (parser.opcode) {
 	case MOV: {

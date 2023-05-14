@@ -39,11 +39,13 @@
 		<Unit filename="include/Computer.h" />
 		<Unit filename="include/Disk.h" />
 		<Unit filename="include/Memory.h" />
+		<Unit filename="include/Opcodes.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ArgumentParser.cpp" />
 		<Unit filename="src/Computer.cpp" />
 		<Unit filename="src/Disk.cpp" />
 		<Unit filename="src/Memory.cpp" />
+		<Unit filename="src/Opcodes.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

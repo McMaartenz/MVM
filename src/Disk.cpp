@@ -27,12 +27,12 @@ uint8_t Disk::read(uint32_t offset) {
 	return read;
 }
 
-void Disk::writeMany(uint32_t offset, const uint8_t* buffer, uint32_t count) {
+void Disk::write_many(uint32_t offset, const uint8_t* buffer, uint32_t count) {
 	stream.seekp(offset, std::ios::beg);
 	stream.write((const char*)buffer, count);
 }
 
-void Disk::readMany(uint32_t offset, uint8_t* buffer, uint32_t count) {
+void Disk::read_many(uint32_t offset, uint8_t* buffer, uint32_t count) {
 	stream.seekg(offset, std::ios::beg);
 	stream.read((char*)buffer, count);
 }

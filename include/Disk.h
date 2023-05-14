@@ -16,8 +16,8 @@ class Disk {
 	void write(uint32_t offset, uint8_t value);
 	uint8_t read(uint32_t offset);
 
-	void writeMany(uint32_t offset, const uint8_t* buffer, uint32_t count);
-	void readMany(uint32_t offset, uint8_t* buffer, uint32_t count);
+	void write_many(uint32_t offset, const uint8_t* buffer, uint32_t count);
+	void read_many(uint32_t offset, uint8_t* buffer, uint32_t count);
 
   protected:
 
