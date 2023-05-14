@@ -13,7 +13,8 @@ class Memory {
 
 	uint8_t get(uint32_t address);
 	void set(uint32_t address, uint8_t value);
-	void write_buffer(uint32_t address, uint8_t* buffer, uint32_t count);
+	void write_buffer(uint32_t address, const uint8_t* buffer, uint32_t count);
+	void read_buffer(uint32_t address, uint8_t* buffer, uint32_t count);
 
   protected:
 

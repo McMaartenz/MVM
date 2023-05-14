@@ -8,14 +8,14 @@ Computer::~Computer() {
 	//dtor
 }
 
-// Copy 0x000 - 0x200 from disk file to RAM, jump to [0x000]
+// Copy 0x000 - 0x200 (512) from disk file to RAM, jump to [0x000]
 void Computer::boot() {
 	IP = 0x0000;
 	SP = 0x02FF; // Give 0xFF addresses of RAM for stack until the OS initializes this
 
 	running = true;
 
-	uint8_t buffer[512] {0}; // = 0x200
+	uint8_t buffer[512]{0};
 	disk_file->read_many(0, buffer, 0x200);
 	memory->write_buffer(0, buffer, 0x200);
 }
