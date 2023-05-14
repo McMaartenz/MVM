@@ -14,7 +14,7 @@
 	<algorithm>
 	<cstring>
 
-1684083836 source:d:\git\repos\mvm\src\computer.cpp
+1684085394 source:d:\git\repos\mvm\src\computer.cpp
 	"Computer.h"
 
 1683975935 d:\git\repos\mvm\include\computer.h
@@ -46,9 +46,10 @@
 1684083411 source:d:\git\repos\mvm\src\disk.cpp
 	"Disk.h"
 
-1683981717 d:\git\repos\mvm\include\opcodes.h
+1684086137 d:\git\repos\mvm\include\opcodes.h
 	<cstdint>
+	<stdexcept>
 
-1683975944 source:d:\git\repos\mvm\src\opcodes.cpp
+1684086272 source:d:\git\repos\mvm\src\opcodes.cpp
 	"Opcodes.h"
 

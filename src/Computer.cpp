@@ -15,28 +15,39 @@ void Computer::boot() {
 
 	running = true;
 
-	uint8_t buffer[512]{0};
+	uint8_t buffer[512] {0};
 	disk_file->read_many(0, buffer, 0x200);
 	memory->write_buffer(0, buffer, 0x200);
 }
 
 void Computer::tick() {
-	uint8_t byte_1, byte_2, byte_3;
+	uint8_t byte_1,
+			byte_2 = 0,
+			byte_3 = 0;
+
+	Opcodes::Parser* parser = nullptr;
 
 	try {
 		byte_1 = memory->get(IP);     // Opcode and options
-		byte_2 = memory->get(IP + 1); // Registers, constant, or empty
-		byte_3 = memory->get(IP + 2); // Constant or empty
+		parser = new Opcodes::Parser(byte_1);
+
+		if (parser->length > 1) {
+			byte_2 = memory->get(IP + 1); // Registers, constant, or empty
+			parser->byte_2(byte_2);
+
+			if (parser->length > 2) {
+				byte_3 = memory->get(IP + 2); // Constant or empty
+				parser->byte_3(byte_3);
+			}
+		}
 	} catch(const std::out_of_range& e) {
 		// TODO: Throw BUS error interrupt
-		std::cout << "BUS error thrown at IP=" << std::hex << IP << std::endl;
+		std::cout << "[i] BUS error thrown at IP=" << std::hex << IP << std::endl;
 		running = false;
 		return;
 	}
 
-	Opcodes::Parser parser(byte_1);
-
-	switch (parser.opcode) {
+	switch (parser->opcode) {
 	case MOV: {
 		std::cout << "MOV!\n";
 		break;
@@ -59,25 +70,5 @@ void Computer::tick() {
 	}
 
 	// Jump should skip this!
-	switch (parser.selection) {
-	case Opcodes::no_arguments: {
-		IP += 1;
-		break;
-	}
-
-	case Opcodes::reg_reg:
-	case Opcodes::just_im8:
-	case Opcodes::just_reg:
-	case Opcodes::just_mem: {
-		IP += 2;
-		break;
-	}
-
-	case Opcodes::reg_mem:
-	case Opcodes::mem_reg:
-	case Opcodes::reg_im8: {
-		IP += 3;
-		break;
-	}
-	}
+	IP += parser->length;
 }
