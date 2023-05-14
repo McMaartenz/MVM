@@ -13,8 +13,8 @@ class Computer {
 	bool running;
 
 	// Registers
-	uint32_t IP;
-	uint32_t SP;
+	uint16_t IP;
+	uint16_t SP;
 
 	Computer(uint32_t memory_size, Disk* disk);
 	virtual ~Computer();

@@ -14,10 +14,10 @@
 	<algorithm>
 	<cstring>
 
-1684090730 source:d:\git\repos\mvm\src\computer.cpp
+1684095131 source:d:\git\repos\mvm\src\computer.cpp
 	"Computer.h"
 
-1684092085 d:\git\repos\mvm\include\computer.h
+1684095323 d:\git\repos\mvm\include\computer.h
 	"Memory.h"
 	"Disk.h"
 	"Opcodes.h"
@@ -54,4 +54,9 @@
 
 1684091601 source:d:\git\repos\mvm\src\opcodes.cpp
 	"Opcodes.h"
+
+1684092934 d:\git\repos\mvm\include\register.h
+
+1684092940 source:d:\git\repos\mvm\src\register.cpp
+	"Register.h"
 
