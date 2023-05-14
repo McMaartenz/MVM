@@ -3,6 +3,8 @@
 
 #include <cstdint>
 #include <cstring>
+#include <vector>
+#include <algorithm>
 
 class Memory {
   public:
@@ -16,7 +18,7 @@ class Memory {
   protected:
 
   private:
-	uint8_t* data;
+	std::vector<uint8_t> data;
 
 };
 

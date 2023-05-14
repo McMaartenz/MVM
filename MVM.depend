@@ -22,9 +22,11 @@
 	"Disk.h"
 	"Opcodes.h"
 
-1684074603 d:\git\repos\mvm\include\memory.h
+1684075832 d:\git\repos\mvm\include\memory.h
 	<cstdint>
 	<cstring>
+	<vector>
+	<algorithm>
 
 1683918337 d:\git\repos\mvm\include\port.h
 
