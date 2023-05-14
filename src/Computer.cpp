@@ -15,7 +15,7 @@ void Computer::boot() {
 
 	running = true;
 
-	uint8_t buffer[512]; // = 0x200
+	uint8_t buffer[512] {0}; // = 0x200
 	disk_file->read_many(0, buffer, 0x200);
 	memory->write_buffer(0, buffer, 0x200);
 }
@@ -27,7 +27,7 @@ void Computer::tick() {
 		byte_1 = memory->get(IP);     // Opcode and options
 		byte_2 = memory->get(IP + 1); // Registers, constant, or empty
 		byte_3 = memory->get(IP + 2); // Constant or empty
-	} catch(std::exception e) {
+	} catch(const std::out_of_range& e) {
 		// TODO: Throw BUS error interrupt
 		std::cout << "BUS error thrown at IP=" << std::hex << IP << std::endl;
 		running = false;
