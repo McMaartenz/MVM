@@ -47,7 +47,6 @@ int main(int argc, char** argv) {
 	Computer computer(memory_size, &disk_file);
 
 	if (use_serial) {
-		std::cout << "[i] Attached serial\n";
 		computer.IO[0x0000].attach(serial_out, serial_in);
 	}
 
