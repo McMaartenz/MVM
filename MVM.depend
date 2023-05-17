@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1684168000 source:d:\git\repos\mvm\main.cpp
+1684349629 source:d:\git\repos\mvm\main.cpp
 	<iostream>
 	<cstdlib>
 	<filesystem>
@@ -14,13 +14,15 @@
 	<algorithm>
 	<cstring>
 
-1684341830 source:d:\git\repos\mvm\src\computer.cpp
+1684348966 source:d:\git\repos\mvm\src\computer.cpp
 	"Computer.h"
 
-1684168000 d:\git\repos\mvm\include\computer.h
+1684347909 d:\git\repos\mvm\include\computer.h
+	<vector>
 	"Memory.h"
 	"Disk.h"
 	"Opcodes.h"
+	"Port.h"
 
 1684168000 d:\git\repos\mvm\include\memory.h
 	<cstdint>
@@ -28,9 +30,12 @@
 	<vector>
 	<algorithm>
 
-1683918337 d:\git\repos\mvm\include\port.h
+1684349090 d:\git\repos\mvm\include\port.h
+	<cstdint>
+	<functional>
+	<iostream>
 
-1683918338 source:d:\git\repos\mvm\src\port.cpp
+1684349113 source:d:\git\repos\mvm\src\port.cpp
 	"Port.h"
 
 1684168000 source:d:\git\repos\mvm\src\memory.cpp

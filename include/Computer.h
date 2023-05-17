@@ -1,14 +1,18 @@
 #ifndef COMPUTER_H
 #define COMPUTER_H
 
+#include <vector>
+
 #include "Memory.h"
 #include "Disk.h"
 #include "Opcodes.h"
+#include "Port.h"
 
 class Computer {
   public:
 	Memory* memory;
 	Disk* disk_file;
+	std::vector<Port> IO;
 
 	bool running;
 

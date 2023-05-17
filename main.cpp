@@ -5,6 +5,16 @@
 #include "ArgumentParser.h"
 #include "Computer.h"
 
+void serial_out(uint8_t value) {
+	std::cout << (char)value;
+}
+
+uint8_t serial_in() {
+	char c;
+	std::cin >> c;
+	return c;
+}
+
 int main(int argc, char** argv) {
 	ArgumentParser::Parser* args = ArgumentParser::Initialize(argc, argv);
 
@@ -35,13 +45,17 @@ int main(int argc, char** argv) {
 
 	Disk disk_file(disk_file_path);
 	Computer computer(memory_size, &disk_file);
-	computer.boot();
 
+	if (use_serial) {
+		std::cout << "[i] Attached serial\n";
+		computer.IO[0x0000].attach(serial_out, serial_in);
+	}
+
+	computer.boot();
 	while (computer.running) {
 		computer.tick();
 	}
 
 	std::cout << "Computer is no longer running\n";
-
 	return EXIT_SUCCESS;
 }

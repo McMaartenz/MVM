@@ -1,7 +1,10 @@
 #include "Computer.h"
 
-Computer::Computer(uint32_t memory_size, Disk* disk) : disk_file(disk) {
+Computer::Computer(uint32_t memory_size, Disk* disk) : disk_file(disk), IO(256) {
 	memory = new Memory(memory_size);
+	for (int i = 0; i < 256; i++) {
+		IO[i] = Port();
+	}
 }
 
 Computer::~Computer() {
@@ -56,12 +59,12 @@ void Computer::tick() {
 	}
 
 	case OUT: {
-		std::cout << "OUT\n";
+		IO[get_operand_2(*parser)].out(get_operand_1(*parser));
 		break;
 	}
 
 	case IN: {
-		std::cout << "IN\n";
+		set_operand_1(*parser, IO[get_operand_2(*parser)].in());
 		break;
 	}
 
@@ -99,6 +102,11 @@ void Computer::tick() {
 		branched = true;
 		break;
 	}
+
+	default: {
+		std::cout << "[!] Unknown instruction IP=" << std::hex << IP << std::endl;
+		break;
+	}
 	}
 
 	if (!branched) {
@@ -120,7 +128,7 @@ uint8_t Computer::get_operand_1(const Opcodes::Parser& parser) {
 		return parser.operand;
 
 	case Parser::Empty:
-		throw std::logic_error("Cannot fetch empty operand");
+		throw std::logic_error("Cannot fetch empty operand"); // TODO: throw interrupt
 
 	default:
 		throw std::logic_error("Unknown type");
@@ -141,7 +149,7 @@ uint8_t Computer::get_operand_2(const Opcodes::Parser& parser) {
 		return parser.operand;
 
 	case Parser::Empty:
-		throw std::logic_error("Cannot fetch empty operand");
+		throw std::logic_error("Cannot fetch empty operand"); // TODO: throw interrupt
 
 	default:
 		throw std::logic_error("Unknown type");
@@ -161,7 +169,7 @@ void Computer::set_operand_1(const Opcodes::Parser& parser, uint8_t value) {
 		break;
 
 	case Parser::Constant:
-		throw std::logic_error("Cannot write to a constant literal");
+		throw std::logic_error("Cannot write to a constant literal"); // TODO: throw interrupt
 
 	case Parser::Empty:
 		throw std::logic_error("Cannot write to an empty operand");
@@ -184,7 +192,7 @@ void Computer::set_operand_2(const Opcodes::Parser& parser, uint8_t value) {
 		break;
 
 	case Parser::Constant:
-		throw std::logic_error("Cannot write to a constant literal");
+		throw std::logic_error("Cannot write to a constant literal"); // TODO: throw interrupt
 
 	case Parser::Empty:
 		throw std::logic_error("Cannot write to an empty operand");
