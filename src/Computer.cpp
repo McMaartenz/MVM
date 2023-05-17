@@ -49,7 +49,7 @@ void Computer::tick() {
 
 	switch (parser->opcode) {
 	case MOV: {
-		std::cout << "MOV!\n";
+		set_operand_1(*parser, get_operand_2(*parser));
 		break;
 	}
 
@@ -78,8 +78,7 @@ uint8_t Computer::get_operand_1(const Opcodes::Parser& parser) {
 
 	switch (parser.operand_1) {
 	case Parser::Register:
-		// dont have em
-		throw std::logic_error("Not implemented");
+		return get_register(parser.register_1);
 
 	case Parser::Address:
 		return memory->get(parser.address);
@@ -100,8 +99,7 @@ uint8_t Computer::get_operand_2(const Opcodes::Parser& parser) {
 
 	switch (parser.operand_2) {
 	case Parser::Register:
-		// dont have em
-		throw std::logic_error("Not implemented");
+		return get_register(parser.register_2);
 
 	case Parser::Address:
 		return memory->get(parser.address);
@@ -122,11 +120,12 @@ void Computer::set_operand_1(const Opcodes::Parser& parser, uint8_t value) {
 
 	switch (parser.operand_1) {
 	case Parser::Register:
-		// dont have em
-		throw std::logic_error("Not implemented");
+		get_register(parser.register_1) = value;
+		break;
 
 	case Parser::Address:
-		return memory->set(parser.address, value);
+		memory->set(parser.address, value);
+		break;
 
 	case Parser::Constant:
 		throw std::logic_error("Cannot write to a constant literal");
@@ -144,8 +143,8 @@ void Computer::set_operand_2(const Opcodes::Parser& parser, uint8_t value) {
 
 	switch (parser.operand_2) {
 	case Parser::Register:
-		// dont have em
-		throw std::logic_error("Not implemented");
+		get_register(parser.register_2) = value;
+		break;
 
 	case Parser::Address:
 		return memory->set(parser.address, value);

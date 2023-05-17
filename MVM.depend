@@ -1,28 +1,28 @@
 # depslib dependency file v1.0
-1683976359 source:d:\git\repos\mvm\main.cpp
+1684168000 source:d:\git\repos\mvm\main.cpp
 	<iostream>
 	<cstdlib>
 	<filesystem>
 	"ArgumentParser.h"
 	"Computer.h"
 
-1683917111 source:d:\git\repos\mvm\src\argumentparser.cpp
+1684168000 source:d:\git\repos\mvm\src\argumentparser.cpp
 	"ArgumentParser.h"
 
-1683917043 d:\git\repos\mvm\include\argumentparser.h
+1684168000 d:\git\repos\mvm\include\argumentparser.h
 	<iostream>
 	<algorithm>
 	<cstring>
 
-1684095584 source:d:\git\repos\mvm\src\computer.cpp
+1684340343 source:d:\git\repos\mvm\src\computer.cpp
 	"Computer.h"
 
-1684097207 d:\git\repos\mvm\include\computer.h
+1684168000 d:\git\repos\mvm\include\computer.h
 	"Memory.h"
 	"Disk.h"
 	"Opcodes.h"
 
-1684083371 d:\git\repos\mvm\include\memory.h
+1684168000 d:\git\repos\mvm\include\memory.h
 	<cstdint>
 	<cstring>
 	<vector>
@@ -33,26 +33,26 @@
 1683918338 source:d:\git\repos\mvm\src\port.cpp
 	"Port.h"
 
-1684083935 source:d:\git\repos\mvm\src\memory.cpp
+1684168000 source:d:\git\repos\mvm\src\memory.cpp
 	"Memory.h"
 
-1684083394 d:\git\repos\mvm\include\disk.h
+1684168000 d:\git\repos\mvm\include\disk.h
 	<filesystem>
 	<iostream>
 	<fstream>
 	<string>
 	<stdexcept>
 
-1684083411 source:d:\git\repos\mvm\src\disk.cpp
+1684168000 source:d:\git\repos\mvm\src\disk.cpp
 	"Disk.h"
 
-1684095543 d:\git\repos\mvm\include\opcodes.h
+1684168000 d:\git\repos\mvm\include\opcodes.h
 	<cstdint>
 	<stdexcept>
 	<tuple>
 	<map>
 
-1684095560 source:d:\git\repos\mvm\src\opcodes.cpp
+1684168000 source:d:\git\repos\mvm\src\opcodes.cpp
 	"Opcodes.h"
 
 1684092934 d:\git\repos\mvm\include\register.h
