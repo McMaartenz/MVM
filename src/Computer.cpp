@@ -73,7 +73,11 @@ void Computer::tick() {
 		return;
 	}
 
-	case JMP: {
+	case JNZ: {
+		if (ZF) {
+			break; // It is zero
+		}
+
 		uint16_t jump_address = 0;
 		switch (parser->selection) {
 		case Opcodes::reg_reg:

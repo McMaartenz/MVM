@@ -26,7 +26,7 @@ Opcode, name, arguments
 0001 - halt (HLT)  
 0010 - in byte (IN) rr r8  
 0011 - out byte (OUT) rr r8  
-0100 - jump (JMP) rr r8 rm r- m- 8-  
+0100 - jump not zero (JNZ) rr r8 rm r- m- 8-  
 
 # Serial I/O ports
 [0000] Serial COM port
