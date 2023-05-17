@@ -10,7 +10,8 @@ enum Opcode {
 	MOV,
 	HLT,
 	IN,
-	OUT
+	OUT,
+	JMP
 };
 
 namespace Opcodes {

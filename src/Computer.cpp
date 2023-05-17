@@ -28,8 +28,8 @@ void Computer::tick() {
 	Opcodes::Parser* parser = nullptr;
 
 	try {
-		byte_1 = memory->get(IP);     // Opcode and options
-		parser = new Opcodes::Parser(byte_1);
+		byte_1 = memory->get(IP); // Opcode and options
+		parser = new Opcodes::Parser(byte_1); // TODO: Do not use pointer, but rather stack
 
 		if (parser->length > 1) {
 			byte_2 = memory->get(IP + 1); // Registers, constant, or empty
@@ -46,6 +46,8 @@ void Computer::tick() {
 		running = false;
 		return;
 	}
+
+	bool branched = false;
 
 	switch (parser->opcode) {
 	case MOV: {
@@ -67,10 +69,41 @@ void Computer::tick() {
 		running = false;
 		return;
 	}
+
+	case JMP: {
+		uint16_t jump_address = 0;
+		switch (parser->selection) {
+		case Opcodes::reg_reg:
+		case Opcodes::reg_im8:
+		case Opcodes::mem_reg:
+		case Opcodes::reg_mem: {
+			jump_address |= get_operand_2(*parser)
+							| (get_operand_1(*parser) << 8);
+			break;
+		}
+
+		case Opcodes::just_mem:
+		case Opcodes::just_reg:
+		case Opcodes::just_im8: {
+			jump_address |= get_operand_1(*parser);
+			break;
+		}
+
+		default: {
+			std::cout << "[!] Illegal instruction IP=" << std::hex << IP << std::endl;
+			return; // TODO: illegal instruction interrupt
+		}
+		}
+
+		IP = jump_address;
+		branched = true;
+		break;
+	}
 	}
 
-	// Jump should skip this!
-	IP += parser->length;
+	if (!branched) {
+		IP += parser->length;
+	}
 }
 
 uint8_t Computer::get_operand_1(const Opcodes::Parser& parser) {
