@@ -2,6 +2,9 @@
 Maarten Virtual Machine  
 Basically a computer that runs machine code from MASM  
 
+# Building
+I have built this using Code::Blocks. If you were to try to compile this, be sure to use C++17 STD.
+
 # Opcodes
 Format of an instruction:  
 oooo sssR rrr1 rrr2 cccc cccc  
