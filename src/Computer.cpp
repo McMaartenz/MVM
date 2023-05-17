@@ -114,6 +114,13 @@ void Computer::tick() {
 		break;
 	}
 
+	case SUB: {
+		uint16_t result = get_operand_1(*parser) - get_operand_2(*parser);
+		set_operand_1(*parser, (uint8_t)result);
+		set_flags(result);
+		break;
+	}
+
 	default: {
 		std::cout << "[!] Unknown instruction IP=" << std::hex << IP << std::endl;
 		break;
@@ -239,5 +246,4 @@ void Computer::set_flags(uint16_t value) {
 	ZF = value == 0;
 	CF = value > UINT8_MAX;
 	SF = (value & 0b1000'0000) > 0;
-
 }

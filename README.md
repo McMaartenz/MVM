@@ -28,6 +28,7 @@ Opcode, name, arguments
 0011 - out byte (OUT) rr r8  
 0100 - jump not zero (JNZ) rr r8 rm r- m- 8-  
 0101 - F add (ADD) rr r8 mr rm  
+0110 - F sub (SUB) rr r8 mr rm
 
 # Serial I/O ports
 [0000] Serial COM port
