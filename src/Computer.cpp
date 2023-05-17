@@ -180,7 +180,8 @@ void Computer::set_operand_2(const Opcodes::Parser& parser, uint8_t value) {
 		break;
 
 	case Parser::Address:
-		return memory->set(parser.address, value);
+		memory->set(parser.address, value);
+		break;
 
 	case Parser::Constant:
 		throw std::logic_error("Cannot write to a constant literal");
