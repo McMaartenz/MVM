@@ -19,7 +19,7 @@ R memory is relative to IP
 c constant, or memory  
 
 ## List of opcodes
-For far jump use any operand mode that takes 2 like rr, r8, rm to utilize 16-bit address space.
+For far jump use any operand mode that takes 2 like rr, r8, rm to utilize 16-bit address space. Anything marked with an 'F' modifies flags.
 
 Opcode, name, arguments  
 0000 - move (MOV) rr r8 mr rm  
@@ -27,6 +27,7 @@ Opcode, name, arguments
 0010 - in byte (IN) rr r8  
 0011 - out byte (OUT) rr r8  
 0100 - jump not zero (JNZ) rr r8 rm r- m- 8-  
+0101 - F add (ADD) rr r8 mr rm  
 
 # Serial I/O ports
 [0000] Serial COM port

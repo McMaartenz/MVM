@@ -27,13 +27,12 @@ class Computer {
 
 	union {
 		uint8_t Flags;
-		struct { // 5/8 flags
+		struct { // 4/8 flags
 			uint8_t ZF : 1;
 			uint8_t CF : 1;
 			uint8_t SF : 1;
-			uint8_t OF : 1;
 			uint8_t IF : 1;
-			uint8_t Unused : 3;
+			uint8_t Unused : 4;
 		};
 	};
 
@@ -56,6 +55,8 @@ class Computer {
   	void set_operand_2(const Opcodes::Parser& parser, uint8_t value);
 
   	uint8_t& get_register(uint8_t register_number);
+
+  	void set_flags(uint16_t value);
 };
 
 #endif // COMPUTER_H

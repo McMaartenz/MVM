@@ -11,7 +11,8 @@ enum Opcode {
 	HLT,
 	IN,
 	OUT,
-	JNZ
+	JNZ,
+	ADD
 };
 
 namespace Opcodes {
