@@ -54,17 +54,17 @@ void Computer::tick() {
 
 	switch (parser.opcode) {
 	case MOV: {
-		set_operand_1(parser, get_operand_2(parser));
+		set_operand<0>(parser, get_operand<1>(parser));
 		break;
 	}
 
 	case OUT: {
-		IO[get_operand_2(parser)].out(get_operand_1(parser));
+		IO[get_operand<1>(parser)].out(get_operand<0>(parser));
 		break;
 	}
 
 	case IN: {
-		set_operand_1(parser, IO[get_operand_2(parser)].in());
+		set_operand<0>(parser, IO[get_operand<1>(parser)].in());
 		break;
 	}
 
@@ -84,15 +84,15 @@ void Computer::tick() {
 		case Opcodes::reg_im8:
 		case Opcodes::mem_reg:
 		case Opcodes::reg_mem: {
-			jump_address |= get_operand_2(parser)
-							| (get_operand_1(parser) << 8);
+			jump_address |= get_operand<1>(parser)
+							| (get_operand<0>(parser) << 8);
 			break;
 		}
 
 		case Opcodes::just_mem:
 		case Opcodes::just_reg:
 		case Opcodes::just_im8: {
-			jump_address |= get_operand_1(parser);
+			jump_address |= get_operand<0>(parser);
 			break;
 		}
 
@@ -108,15 +108,15 @@ void Computer::tick() {
 	}
 
 	case ADD: {
-		uint16_t result = get_operand_1(parser) + get_operand_2(parser);
-		set_operand_1(parser, (uint8_t)result);
+		uint16_t result = get_operand<0>(parser) + get_operand<1>(parser);
+		set_operand<0>(parser, (uint8_t)result);
 		set_flags(result);
 		break;
 	}
 
 	case SUB: {
-		uint16_t result = get_operand_1(parser) - get_operand_2(parser);
-		set_operand_1(parser, (uint8_t)result);
+		uint16_t result = get_operand<0>(parser) - get_operand<1>(parser);
+		set_operand<0>(parser, (uint8_t)result);
 		set_flags(result);
 		break;
 	}
@@ -132,13 +132,13 @@ void Computer::tick() {
 	}
 }
 
-// The below all can be done more elegantly
-uint8_t Computer::get_operand_1(const Opcodes::Parser& parser) {
+template <size_t n>
+uint8_t Computer::get_operand(const Opcodes::Parser& parser) {
 	using namespace Opcodes;
 
-	switch (parser.operand_1) {
+	switch (n == 0 ? parser.operand_1 : parser.operand_2) {
 	case Parser::Register:
-		return get_register(parser.register_1);
+		return get_register(n == 0 ? parser.register_1 : parser.register_2);
 
 	case Parser::Address:
 		return memory->get(parser.address);
@@ -147,40 +147,20 @@ uint8_t Computer::get_operand_1(const Opcodes::Parser& parser) {
 		return parser.operand;
 
 	case Parser::Empty:
-		throw std::logic_error("Cannot fetch empty operand"); // TODO: throw interrupt
+		throw std::logic_error("Cannot fetch empty operand");
 
 	default:
 		throw std::logic_error("Unknown type");
 	}
 }
 
-uint8_t Computer::get_operand_2(const Opcodes::Parser& parser) {
+template <size_t n>
+void Computer::set_operand(const Opcodes::Parser& parser, uint8_t value) {
 	using namespace Opcodes;
 
-	switch (parser.operand_2) {
+	switch (n == 0 ? parser.operand_1 : parser.operand_2) {
 	case Parser::Register:
-		return get_register(parser.register_2);
-
-	case Parser::Address:
-		return memory->get(parser.address);
-
-	case Parser::Constant:
-		return parser.operand;
-
-	case Parser::Empty:
-		throw std::logic_error("Cannot fetch empty operand"); // TODO: throw interrupt
-
-	default:
-		throw std::logic_error("Unknown type");
-	}
-}
-
-void Computer::set_operand_1(const Opcodes::Parser& parser, uint8_t value) {
-	using namespace Opcodes;
-
-	switch (parser.operand_1) {
-	case Parser::Register:
-		get_register(parser.register_1) = value;
+		get_register(n == 0 ? parser.register_1 : parser.register_2) = value;
 		break;
 
 	case Parser::Address:
@@ -188,33 +168,10 @@ void Computer::set_operand_1(const Opcodes::Parser& parser, uint8_t value) {
 		break;
 
 	case Parser::Constant:
-		throw std::logic_error("Cannot write to a constant literal"); // TODO: throw interrupt
+		throw std::logic_error("Cannot write to a constant literal");
 
 	case Parser::Empty:
-		throw std::logic_error("Cannot write to an empty operand");
-
-	default:
-		throw std::logic_error("Unknown type");
-	}
-}
-
-void Computer::set_operand_2(const Opcodes::Parser& parser, uint8_t value) {
-	using namespace Opcodes;
-
-	switch (parser.operand_2) {
-	case Parser::Register:
-		get_register(parser.register_2) = value;
-		break;
-
-	case Parser::Address:
-		memory->set(parser.address, value);
-		break;
-
-	case Parser::Constant:
-		throw std::logic_error("Cannot write to a constant literal"); // TODO: throw interrupt
-
-	case Parser::Empty:
-		throw std::logic_error("Cannot write to an empty operand");
+		throw std::logic_error("Cannot fetch empty operand");
 
 	default:
 		throw std::logic_error("Unknown type");

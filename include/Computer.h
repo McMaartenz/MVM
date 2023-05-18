@@ -47,12 +47,11 @@ class Computer {
   protected:
 
   private:
-  	/* operand from memory/register/constant */
-  	uint8_t get_operand_1(const Opcodes::Parser& parser);
-  	uint8_t get_operand_2(const Opcodes::Parser& parser);
+	template <size_t n>
+	uint8_t get_operand(const Opcodes::Parser& parser);
 
-  	void set_operand_1(const Opcodes::Parser& parser, uint8_t value);
-  	void set_operand_2(const Opcodes::Parser& parser, uint8_t value);
+	template <size_t n>
+	void set_operand(const Opcodes::Parser& parser, uint8_t value);
 
   	uint8_t& get_register(uint8_t register_number);
 
