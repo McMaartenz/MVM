@@ -4,6 +4,7 @@
 
 #include "ArgumentParser.h"
 #include "Computer.h"
+#include "Debugger.h"
 
 void serial_out(uint8_t value) {
 	std::cout << (char)value;
@@ -14,6 +15,8 @@ uint8_t serial_in() {
 	std::cin >> c;
 	return c;
 }
+
+void run(Computer& computer);
 
 int main(int argc, char** argv) {
 	ArgumentParser::Parser* args = ArgumentParser::Initialize(argc, argv);
@@ -51,10 +54,20 @@ int main(int argc, char** argv) {
 	}
 
 	computer.boot();
-	while (computer.running) {
-		computer.tick();
+
+	if (use_debug) {
+		Dbg::run_dbg(computer);
+	}
+	else {
+		run(computer);
 	}
 
 	std::cout << "Computer is no longer running\n";
 	return EXIT_SUCCESS;
+}
+
+void run(Computer& computer) {
+	while (computer.running) {
+		computer.tick();
+	}
 }
