@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters='-m 1024 -f &quot;runtime/disk.bin&quot;' />
+				<Option parameters='-m 1024 -f &quot;runtime/disk.bin&quot; -s' />
 				<Compiler>
 					<Add option="-g" />
 					<Add directory="include" />
@@ -40,12 +40,14 @@
 		<Unit filename="include/Disk.h" />
 		<Unit filename="include/Memory.h" />
 		<Unit filename="include/Opcodes.h" />
+		<Unit filename="include/Port.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ArgumentParser.cpp" />
 		<Unit filename="src/Computer.cpp" />
 		<Unit filename="src/Disk.cpp" />
 		<Unit filename="src/Memory.cpp" />
 		<Unit filename="src/Opcodes.cpp" />
+		<Unit filename="src/Port.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

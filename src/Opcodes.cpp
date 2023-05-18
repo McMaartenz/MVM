@@ -1,7 +1,8 @@
 #include "Opcodes.h"
 
 namespace Opcodes {
-Parser::Parser(uint8_t first_byte) : address(operand) {
+
+void Parser::from(uint8_t first_byte) {
 	selection = get_selection(first_byte);
 	opcode = (Opcode)(first_byte >> 4);
 	relative_address = first_byte & 0b1;
@@ -21,6 +22,9 @@ Parser::Parser(uint8_t first_byte) : address(operand) {
 	auto types = types_mapping[selection];
 	operand_1 = std::get<0>(types);
 	operand_2 = std::get<1>(types);
+}
+Parser::Parser() {
+	//ctor
 }
 
 Parser::~Parser() {

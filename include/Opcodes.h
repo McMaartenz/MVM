@@ -43,7 +43,7 @@ class Parser {
 	Opcode opcode;
 
 	uint8_t operand;
-	uint8_t& address;
+	uint8_t& address = operand;
 
 	bool relative_address;
 	uint32_t length;
@@ -54,8 +54,10 @@ class Parser {
 	Type operand_1;
 	Type operand_2;
 
-	Parser(uint8_t first_byte);
+	Parser();
 	virtual ~Parser();
+
+	void from(uint8_t first_byte);
 
 	void byte_2(uint8_t second_byte);
 	void byte_3(uint8_t third_byte);

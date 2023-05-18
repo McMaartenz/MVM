@@ -28,19 +28,19 @@ void Computer::tick() {
 			byte_2 = 0,
 			byte_3 = 0;
 
-	Opcodes::Parser* parser = nullptr;
+	Opcodes::Parser parser;
 
 	try {
 		byte_1 = memory->get(IP); // Opcode and options
-		parser = new Opcodes::Parser(byte_1); // TODO: Do not use pointer, but rather stack
+		parser.from(byte_1);
 
-		if (parser->length > 1) {
+		if (parser.length > 1) {
 			byte_2 = memory->get(IP + 1); // Registers, constant, or empty
-			parser->byte_2(byte_2);
+			parser.byte_2(byte_2);
 
-			if (parser->length > 2) {
+			if (parser.length > 2) {
 				byte_3 = memory->get(IP + 2); // Constant or empty
-				parser->byte_3(byte_3);
+				parser.byte_3(byte_3);
 			}
 		}
 	} catch(const std::out_of_range& e) {
@@ -52,19 +52,19 @@ void Computer::tick() {
 
 	bool branched = false;
 
-	switch (parser->opcode) {
+	switch (parser.opcode) {
 	case MOV: {
-		set_operand_1(*parser, get_operand_2(*parser));
+		set_operand_1(parser, get_operand_2(parser));
 		break;
 	}
 
 	case OUT: {
-		IO[get_operand_2(*parser)].out(get_operand_1(*parser));
+		IO[get_operand_2(parser)].out(get_operand_1(parser));
 		break;
 	}
 
 	case IN: {
-		set_operand_1(*parser, IO[get_operand_2(*parser)].in());
+		set_operand_1(parser, IO[get_operand_2(parser)].in());
 		break;
 	}
 
@@ -79,20 +79,20 @@ void Computer::tick() {
 		}
 
 		uint16_t jump_address = 0;
-		switch (parser->selection) {
+		switch (parser.selection) {
 		case Opcodes::reg_reg:
 		case Opcodes::reg_im8:
 		case Opcodes::mem_reg:
 		case Opcodes::reg_mem: {
-			jump_address |= get_operand_2(*parser)
-							| (get_operand_1(*parser) << 8);
+			jump_address |= get_operand_2(parser)
+							| (get_operand_1(parser) << 8);
 			break;
 		}
 
 		case Opcodes::just_mem:
 		case Opcodes::just_reg:
 		case Opcodes::just_im8: {
-			jump_address |= get_operand_1(*parser);
+			jump_address |= get_operand_1(parser);
 			break;
 		}
 
@@ -108,15 +108,15 @@ void Computer::tick() {
 	}
 
 	case ADD: {
-		uint16_t result = get_operand_1(*parser) + get_operand_2(*parser);
-		set_operand_1(*parser, (uint8_t)result);
+		uint16_t result = get_operand_1(parser) + get_operand_2(parser);
+		set_operand_1(parser, (uint8_t)result);
 		set_flags(result);
 		break;
 	}
 
 	case SUB: {
-		uint16_t result = get_operand_1(*parser) - get_operand_2(*parser);
-		set_operand_1(*parser, (uint8_t)result);
+		uint16_t result = get_operand_1(parser) - get_operand_2(parser);
+		set_operand_1(parser, (uint8_t)result);
 		set_flags(result);
 		break;
 	}
@@ -128,10 +128,11 @@ void Computer::tick() {
 	}
 
 	if (!branched) {
-		IP += parser->length;
+		IP += parser.length;
 	}
 }
 
+// The below all can be done more elegantly
 uint8_t Computer::get_operand_1(const Opcodes::Parser& parser) {
 	using namespace Opcodes;
 
