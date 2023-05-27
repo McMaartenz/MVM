@@ -108,7 +108,12 @@ void Dbg::handle_command(Computer& computer, std::string& command, bool& inputti
 		return;
 	}
 
-	std::get<1>(it->second)(computer);
+	try {
+		std::get<1>(it->second)(computer);
+	}
+	catch(const std::exception& e) {
+		std::cerr << "Exception during command execution: " << e.what();
+	}
 }
 
 void Dbg::print_reg(uint16_t value) {
