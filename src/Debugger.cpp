@@ -58,7 +58,7 @@ void Dbg::handle_command(Computer& computer, std::string& command, bool& inputti
 		},
 		{
 			"goto", {"[address] Jump to specified address", [&args](Computer& c) {
-				c.IP = (uint16_t)std::stoi(args[1]);
+				c.IP = (uint16_t)make_number(args.at(1));
 				std::cout << "IP"; print_reg(c.IP);
 			}}
 		},
@@ -97,14 +97,16 @@ void Dbg::handle_command(Computer& computer, std::string& command, bool& inputti
 		return;
     }
 
-    std::transform(args[0].begin(), args[0].end(), args[0].begin(),
+    // Name of command
+    std::string& name = args.at(0);
+    std::transform(name.begin(), name.end(), name.begin(),
 		[](unsigned char  c) {
 			return std::tolower(c);
 		});
 
-	auto it = commands.find(args[0]);
+	auto it = commands.find(name);
 	if (it == commands.end()) {
-		std::cout << "No such command `" << args[0] << "'\n";
+		std::cout << "No such command `" << name << "'\n";
 		return;
 	}
 
@@ -142,3 +144,25 @@ void Dbg::flag_print(uint8_t fl, std::string name) {
 		std::cout << "   ";
 	}
 };
+
+uint32_t Dbg::make_number(std::string& input) {
+	std::transform(input.begin(), input.end(), input.begin(),
+		[](unsigned char c) {
+			return std::tolower(c);
+		});
+
+	// identify string
+	if (input.rfind("0x", 0) == 0) {
+		return std::stoi(input, 0, 16);
+	}
+
+	if (input.rfind("0b", 0) == 0) {
+		return std::stoi(input.substr(2), 0, 2);
+	}
+
+	if (input.rfind("0", 0) == 0) {
+		return std::stoi(input, 0, 8);
+	}
+
+	return std::stoi(input);
+}

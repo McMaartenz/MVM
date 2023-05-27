@@ -66,10 +66,10 @@
 1684092940 source:d:\git\repos\mvm\src\register.cpp
 	"Register.h"
 
-1684410691 source:d:\git\repos\mvm\src\debugger.cpp
+1685208481 source:d:\git\repos\mvm\src\debugger.cpp
 	"Debugger.h"
 
-1685207851 d:\git\repos\mvm\include\debugger.h
+1685208240 d:\git\repos\mvm\include\debugger.h
 	<iostream>
 	<iomanip>
 	<bitset>
