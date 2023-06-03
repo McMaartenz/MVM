@@ -18,6 +18,7 @@ public:
 	bool exit;
 
 	Instance(Computer& computer);
+	virtual ~Instance();
 
 	void run();
 	void step();

@@ -21,7 +21,11 @@ void terminal(Instance& instance) {
 	}
 }
 
-Instance::Instance(Computer& computer) : computer(computer), inputting(false), steps(0) {}
+Instance::Instance(Computer& computer) : computer(computer), inputting(false), steps(0), exit(false) {}
+
+Instance::~Instance() {
+	//dtor
+}
 
 void Instance::run() {
 	step();
