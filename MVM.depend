@@ -1,11 +1,12 @@
 # depslib dependency file v1.0
-1685809747 source:d:\git\repos\mvm\main.cpp
+1685812136 source:d:\git\repos\mvm\main.cpp
 	<iostream>
 	<cstdlib>
 	<filesystem>
 	"ArgumentParser.h"
 	"Computer.h"
 	"Debugger.h"
+	"Test.h"
 
 1684406356 source:d:\git\repos\mvm\src\argumentparser.cpp
 	"ArgumentParser.h"
@@ -66,13 +67,25 @@
 1684092940 source:d:\git\repos\mvm\src\register.cpp
 	"Register.h"
 
-1685208481 source:d:\git\repos\mvm\src\debugger.cpp
+1685811614 source:d:\git\repos\mvm\src\debugger.cpp
 	"Debugger.h"
 
-1685810391 d:\git\repos\mvm\include\debugger.h
+1685811065 d:\git\repos\mvm\include\debugger.h
 	<iostream>
 	<iomanip>
 	<bitset>
 	<algorithm>
 	"Computer.h"
+
+1685814993 source:d:\git\repos\mvm\src\test.cpp
+	"Test.h"
+
+1685814565 d:\git\repos\mvm\include\test.h
+	<iostream>
+	<vector>
+	<tuple>
+	<chrono>
+	<iomanip>
+	<sstream>
+	"Debugger.h"
 

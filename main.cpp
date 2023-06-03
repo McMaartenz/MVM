@@ -5,6 +5,7 @@
 #include "ArgumentParser.h"
 #include "Computer.h"
 #include "Debugger.h"
+#include "Test.h"
 
 void serial_out(uint8_t value) {
 	std::cout << (char)value;
@@ -17,6 +18,7 @@ uint8_t serial_in() {
 }
 
 void run(Computer& computer);
+void register_tests(Tester& tester);
 
 int main(int argc, char** argv) {
 	ArgumentParser::Parser* args = ArgumentParser::Initialize(argc, argv);
@@ -56,7 +58,10 @@ int main(int argc, char** argv) {
 	computer.boot();
 
 	if (use_tests) {
+		Tester tester;
 
+		register_tests(tester);
+		tester.execute_tests();
 		return EXIT_SUCCESS;
 	}
 
@@ -76,4 +81,12 @@ void run(Computer& computer) {
 	while (computer.running) {
 		computer.tick();
 	}
+}
+
+// Put your tests here
+void register_tests(Tester& tester) {
+	tester.register_test("Can run",
+		[tester](Debugger::Instance& instance) {
+			std::cout << "Hello from test\n";
+		});
 }
