@@ -24,12 +24,12 @@ int main(int argc, char** argv) {
 	std::cout << "Hello, World!\n";
 
 	// Flag settings loading
-
 	int memory_size = args->flag_ivalue("-m", 1024); // Memory size
 	std::string disk_file_path = args->flag_value("-f"); // Disk file
 
 	bool use_serial = args->has_flag("-s"); // Use serial
 	bool use_debug = args->has_flag("-d"); // Use debugger
+	bool use_tests = args->has_flag("-t"); // Use tester
 
 	// Flag validation
 	if (memory_size < 255) {
@@ -54,6 +54,11 @@ int main(int argc, char** argv) {
 	}
 
 	computer.boot();
+
+	if (use_tests) {
+
+		return EXIT_SUCCESS;
+	}
 
 	if (use_debug) {
 		Debugger::Instance instance(computer);
