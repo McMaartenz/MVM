@@ -8,14 +8,27 @@
 
 #include "Computer.h"
 
-namespace Dbg {
+namespace Debugger {
 
-void run_dbg(Computer& computer);
-void handle_command(Computer& computer, std::string& command, bool& inputting, bool& single_step);
+class Instance {
+public:
+	Computer& computer;
+	bool inputting;
+	int steps;
+	bool exit;
+
+	Instance(Computer& computer);
+
+	void run();
+	void step();
+
+	void handle_command(const std::string& command);
+};
+
 void print_reg(uint16_t value);
-void flag_print(uint8_t fl, std::string name);
+void flag_print(uint8_t flag, const std::string name);
 uint32_t make_number(std::string& input);
-
+void terminal(Instance& instance);
 }
 
 #endif // DEBUGGER_H

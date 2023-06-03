@@ -56,7 +56,8 @@ int main(int argc, char** argv) {
 	computer.boot();
 
 	if (use_debug) {
-		Dbg::run_dbg(computer);
+		Debugger::Instance instance(computer);
+		Debugger::terminal(instance);
 	}
 	else {
 		run(computer);

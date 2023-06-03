@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1684409660 source:d:\git\repos\mvm\main.cpp
+1685809747 source:d:\git\repos\mvm\main.cpp
 	<iostream>
 	<cstdlib>
 	<filesystem>
@@ -69,7 +69,7 @@
 1685208481 source:d:\git\repos\mvm\src\debugger.cpp
 	"Debugger.h"
 
-1685208240 d:\git\repos\mvm\include\debugger.h
+1685810391 d:\git\repos\mvm\include\debugger.h
 	<iostream>
 	<iomanip>
 	<bitset>
