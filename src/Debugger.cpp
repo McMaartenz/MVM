@@ -2,7 +2,9 @@
 
 namespace Debugger {
 void terminal(Instance& instance) {
-	std::cout << "Copyright (c) 2023-present Maarten van Keulen MaartenvKeulen@proton.me\nThis program and its source code are licensed under the MIT license (See LICENSE)\nEnter HELP for a list of commands";
+	std::cout << "Copyright (c) 2023-present Maarten van Keulen MaartenvKeulen@proton.me\n"
+			   << "This program and its source code are licensed under the MIT license (See LICENSE)\n"
+			   << "Enter HELP for a list of commands\n";
 	std::string input;
 
 	instance.inputting = true;
