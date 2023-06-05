@@ -1,6 +1,9 @@
 # MVM
 Maarten Virtual Machine  
 Basically a computer that runs machine code from MASM  
+The default program accepts an input.  
+- If this is 1, it continuously prints 1 on the serial port until halted.  
+- If this is anything else, it halts with no further output.  
 
 # Building
 I have built this using Code::Blocks. If you were to try to compile this, be sure to use C++17 STD.
@@ -32,4 +35,3 @@ Opcode, name, arguments
 
 # Serial I/O ports
 [0000] Serial COM port
-
