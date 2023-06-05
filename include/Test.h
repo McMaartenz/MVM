@@ -9,6 +9,7 @@
 #include <sstream>
 
 #include "Debugger.h"
+#include "RAMDisk.h"
 
 class Tester {
 public:

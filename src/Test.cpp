@@ -21,7 +21,8 @@ void Tester::execute_tests() {
 
 	for (auto& test : tests) {
 		try {
-			Computer computer(1024, nullptr /* Create Disk constructor that allows RAM disk? */);
+			RAMDisk disk(1024);
+			Computer computer(1024, &disk);
 			computer.boot();
 
 			Debugger::Instance instance(computer);
