@@ -1,0 +1,93 @@
+# depslib dependency file v1.0
+1685812136 source:d:\git\repos\mvm\main.cpp
+	<iostream>
+	<cstdlib>
+	<filesystem>
+	"ArgumentParser.h"
+	"Computer.h"
+	"Debugger.h"
+	"Test.h"
+
+1684406356 d:\git\repos\mvm\include\argumentparser.h
+	<iostream>
+	<algorithm>
+	<cstring>
+
+1685992404 d:\git\repos\mvm\include\computer.h
+	<vector>
+	"Memory.h"
+	"Disk.h"
+	"Opcodes.h"
+	"Port.h"
+
+1684406356 d:\git\repos\mvm\include\memory.h
+	<cstdint>
+	<cstring>
+	<vector>
+	<algorithm>
+
+1685991435 d:\git\repos\mvm\include\disk.h
+	<filesystem>
+	<iostream>
+	<fstream>
+	<string>
+	<stdexcept>
+
+1684406356 d:\git\repos\mvm\include\opcodes.h
+	<cstdint>
+	<stdexcept>
+	<tuple>
+	<map>
+
+1684406356 d:\git\repos\mvm\include\port.h
+	<cstdint>
+	<functional>
+	<iostream>
+
+1685811065 d:\git\repos\mvm\include\debugger.h
+	<iostream>
+	<iomanip>
+	<bitset>
+	<algorithm>
+	"Computer.h"
+
+1685991302 d:\git\repos\mvm\include\test.h
+	<iostream>
+	<vector>
+	<tuple>
+	<chrono>
+	<iomanip>
+	<sstream>
+	"Debugger.h"
+	"RAMDisk.h"
+
+1685992619 d:\git\repos\mvm\include\ramdisk.h
+	<Disk.h>
+
+1684406356 source:d:\git\repos\mvm\src\argumentparser.cpp
+	"ArgumentParser.h"
+
+1684406356 source:d:\git\repos\mvm\src\computer.cpp
+	"Computer.h"
+
+1685811614 source:d:\git\repos\mvm\src\debugger.cpp
+	"Debugger.h"
+
+1685991372 source:d:\git\repos\mvm\src\disk.cpp
+	"Disk.h"
+
+1684406356 source:d:\git\repos\mvm\src\memory.cpp
+	"Memory.h"
+
+1684406356 source:d:\git\repos\mvm\src\opcodes.cpp
+	"Opcodes.h"
+
+1684406356 source:d:\git\repos\mvm\src\port.cpp
+	"Port.h"
+
+1685991379 source:d:\git\repos\mvm\src\ramdisk.cpp
+	"RAMDisk.h"
+
+1685991461 source:d:\git\repos\mvm\src\test.cpp
+	"Test.h"
+

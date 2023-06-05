@@ -42,6 +42,7 @@
 		<Unit filename="include/Memory.h" />
 		<Unit filename="include/Opcodes.h" />
 		<Unit filename="include/Port.h" />
+		<Unit filename="include/RAMDisk.h" />
 		<Unit filename="include/Test.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ArgumentParser.cpp" />
@@ -51,6 +52,7 @@
 		<Unit filename="src/Memory.cpp" />
 		<Unit filename="src/Opcodes.cpp" />
 		<Unit filename="src/Port.cpp" />
+		<Unit filename="src/RAMDisk.cpp" />
 		<Unit filename="src/Test.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

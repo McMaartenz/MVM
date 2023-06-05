@@ -44,6 +44,9 @@ class Computer {
 	void boot();
 	void tick();
 
+  protected:
+
+  private:
 	template <size_t n>
 	uint8_t get_operand(const Opcodes::Parser& parser);
 
@@ -54,9 +57,6 @@ class Computer {
 
   	void set_flags(uint16_t value);
 
-  protected:
-
-  private:
 };
 
 #endif // COMPUTER_H

@@ -3,8 +3,8 @@
 namespace Debugger {
 void terminal(Instance& instance) {
 	std::cout << "Copyright (c) 2023-present Maarten van Keulen MaartenvKeulen@proton.me\n"
-			   << "This program and its source code are licensed under the MIT license (See LICENSE)\n"
-			   << "Enter HELP for a list of commands\n";
+			  << "This program and its source code are licensed under the MIT license (See LICENSE)\n"
+			  << "Enter HELP for a list of commands\n";
 	std::string input;
 
 	instance.inputting = true;
@@ -41,8 +41,7 @@ void Instance::run() {
 	}
 }
 
-void Instance::step()
-{
+void Instance::step() {
 	this->computer.tick();
 }
 
@@ -52,78 +51,92 @@ void Instance::handle_command(const std::string& command) {
 	std::tuple<std::string, std::function<void()>>> commands {
 		{
 			"help", {"Shows a list of commands", [&commands]() {
-				for (const auto& command : commands) {
-					std::cout << command.first << " - " << std::get<0>(command.second) << std::endl;
+					for (const auto& command : commands) {
+						std::cout << command.first << " - " << std::get<0>(command.second) << std::endl;
+					}
 				}
-			}}
+			}
 		},
 		{
 			"c", {"Continues execution", [this]() {
-				computer.running = true;
-				inputting = false;
-			}}
+					computer.running = true;
+					inputting = false;
+				}
+			}
 		},
 		{
 			"s", {"[amount opt] Take a single step or a given amount of steps", [this, &args]() {
-				computer.running = true;
-				inputting = false;
-				steps = (args.size() > 1)
+					computer.running = true;
+					inputting = false;
+					steps = (args.size() > 1)
 					? make_number(args.at(1))
 					: 1;
-			}}
+				}
+			}
 		},
 		{
 			"quit", {"Quits the debugger", [this]() {
-				exit = true;
-			}}
+					exit = true;
+				}
+			}
 		},
 		{
 			"goto", {"[address] Jump to specified address", [this, &args]() {
-				computer.IP = (uint16_t)make_number(args.at(1));
-				std::cout << "IP"; print_reg(computer.IP);
-			}}
+					computer.IP = (uint16_t)make_number(args.at(1));
+					std::cout << "IP";
+					print_reg(computer.IP);
+				}
+			}
 		},
 		{
 			"reg", {"Display CPU registers", [this]() {
-				std::cout << "IP"; print_reg(computer.IP);
-				std::cout << "SP"; print_reg(computer.SP);
-				std::cout << "AX"; print_reg(computer.AX);
-				std::cout << "BX"; print_reg(computer.BX);
-				std::cout << "CX"; print_reg(computer.CX);
-				std::cout << "DX"; print_reg(computer.DX);
-				std::cout << "EX"; print_reg(computer.EX);
-				std::cout << "FL ";
-				flag_print(computer.ZF, "ZF");
-				flag_print(computer.CF, "CF");
-				flag_print(computer.SF, "SF");
-				flag_print(computer.IF, "IF");
-			}}
+					std::cout << "IP";
+					print_reg(computer.IP);
+					std::cout << "SP";
+					print_reg(computer.SP);
+					std::cout << "AX";
+					print_reg(computer.AX);
+					std::cout << "BX";
+					print_reg(computer.BX);
+					std::cout << "CX";
+					print_reg(computer.CX);
+					std::cout << "DX";
+					print_reg(computer.DX);
+					std::cout << "EX";
+					print_reg(computer.EX);
+					std::cout << "FL ";
+					flag_print(computer.ZF, "ZF");
+					flag_print(computer.CF, "CF");
+					flag_print(computer.SF, "SF");
+					flag_print(computer.IF, "IF");
+				}
+			}
 		}
 	};
 
-    size_t pos = 0, prev_pos = 0;
-    while (true) {
-        pos = command.find(' ', prev_pos);
-        if (pos == std::string::npos) {
-            args.push_back(command.substr(prev_pos));
-            break;
-        }
+	size_t pos = 0, prev_pos = 0;
+	while (true) {
+		pos = command.find(' ', prev_pos);
+		if (pos == std::string::npos) {
+			args.push_back(command.substr(prev_pos));
+			break;
+		}
 
-        args.push_back(command.substr(prev_pos, pos - prev_pos));
-        prev_pos = pos + 1;
-    }
+		args.push_back(command.substr(prev_pos, pos - prev_pos));
+		prev_pos = pos + 1;
+	}
 
-    if (args.empty()) {
+	if (args.empty()) {
 		std::cout << "No such command\n";
 		return;
-    }
+	}
 
-    // Name of command
-    std::string& name = args.at(0);
-    std::transform(name.begin(), name.end(), name.begin(),
-		[](unsigned char  c) {
-			return std::tolower(c);
-		});
+	// Name of command
+	std::string& name = args.at(0);
+	std::transform(name.begin(), name.end(), name.begin(),
+	[](unsigned char  c) {
+		return std::tolower(c);
+	});
 
 	auto it = commands.find(name);
 	if (it == commands.end()) {
@@ -133,8 +146,7 @@ void Instance::handle_command(const std::string& command) {
 
 	try {
 		std::get<1>(it->second)();
-	}
-	catch(const std::exception& e) {
+	} catch(const std::exception& e) {
 		std::cerr << "Exception during command execution: " << e.what();
 	}
 }
@@ -160,17 +172,16 @@ void print_reg(uint16_t value) {
 void flag_print(uint8_t flag, const std::string name) {
 	if (flag) {
 		std::cout << name << ' ';
-	}
-	else {
+	} else {
 		std::cout << "   ";
 	}
 };
 
 uint32_t make_number(std::string& input) {
 	std::transform(input.begin(), input.end(), input.begin(),
-		[](unsigned char c) {
-			return std::tolower(c);
-		});
+	[](unsigned char c) {
+		return std::tolower(c);
+	});
 
 	// identify string
 	if (input.rfind("0x", 0) == 0) {
