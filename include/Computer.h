@@ -56,6 +56,7 @@ class Computer {
   	uint8_t& get_register(uint8_t register_number);
 
   	void set_flags(uint16_t value);
+
 };
 
 #endif // COMPUTER_H

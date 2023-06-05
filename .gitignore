@@ -16,3 +16,7 @@ obj/
 .bak
 .bac
 
+# c::b
+*.layout
+*.depends
+

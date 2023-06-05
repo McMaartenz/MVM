@@ -9,6 +9,10 @@ Disk::Disk(std::string path)
 	stream.open(path, std::ios::in | std::ios::out | std::ios::binary);
 }
 
+Disk::Disk() {
+	//ctor protected
+}
+
 Disk::~Disk()
 {
 	//dtor
