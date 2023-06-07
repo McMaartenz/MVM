@@ -109,21 +109,21 @@ void register_tests(Tester& tester) {
 
 	tester.register_test("false == false",
 		[tester](Instance& instance) {
-			Assertion<bool> _test(false, BoolConstraint::IsFalse);
+			Assertion _test(false, BoolConstraint::IsFalse);
 		});
 
 	tester.register_test("false == true",
 		[tester](Instance& instance) {
-			Assertion<bool> _test(false, BoolConstraint::IsTrue);
+			Assertion _test(false, BoolConstraint::IsTrue);
 		});
 
 	tester.register_test("true == false",
 		[tester](Instance& instance) {
-			Assertion<bool> _test(true, BoolConstraint::IsFalse);
+			Assertion _test(true, BoolConstraint::IsFalse);
 		});
 
 	tester.register_test("true == true",
 		[tester](Instance& instance) {
-			Assertion<bool> _test(true, BoolConstraint::IsTrue);
+			Assertion _test(true, BoolConstraint::IsTrue);
 		});
 }
