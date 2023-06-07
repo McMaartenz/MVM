@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1685812136 source:d:\git\repos\mvm\main.cpp
+1686166085 source:d:\git\repos\mvm\main.cpp
 	<iostream>
 	<cstdlib>
 	<filesystem>
@@ -51,7 +51,8 @@
 	<algorithm>
 	"Computer.h"
 
-1685991302 d:\git\repos\mvm\include\test.h
+1686166136 d:\git\repos\mvm\include\test.h
+	<exception>
 	<iostream>
 	<vector>
 	<tuple>
@@ -60,6 +61,7 @@
 	<sstream>
 	"Debugger.h"
 	"RAMDisk.h"
+	"Assertion.h"
 
 1685992619 d:\git\repos\mvm\include\ramdisk.h
 	<Disk.h>
@@ -70,7 +72,7 @@
 1684406356 source:d:\git\repos\mvm\src\computer.cpp
 	"Computer.h"
 
-1685811614 source:d:\git\repos\mvm\src\debugger.cpp
+1685992671 source:d:\git\repos\mvm\src\debugger.cpp
 	"Debugger.h"
 
 1685991372 source:d:\git\repos\mvm\src\disk.cpp
@@ -88,6 +90,16 @@
 1685991379 source:d:\git\repos\mvm\src\ramdisk.cpp
 	"RAMDisk.h"
 
-1685991461 source:d:\git\repos\mvm\src\test.cpp
+1686164965 source:d:\git\repos\mvm\src\test.cpp
 	"Test.h"
+
+1686165743 source:d:\git\repos\mvm\src\assertion.cpp
+	"Assertion.h"
+
+1686165908 d:\git\repos\mvm\include\assertion.h
+	<stdexcept>
+	<sstream>
+	"Assertion.tpp"
+
+1686165745 d:\git\repos\mvm\include\assertion.tpp
 

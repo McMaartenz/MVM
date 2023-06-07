@@ -36,6 +36,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/ArgumentParser.h" />
+		<Unit filename="include/Assertion.h" />
 		<Unit filename="include/Computer.h" />
 		<Unit filename="include/Debugger.h" />
 		<Unit filename="include/Disk.h" />
@@ -46,6 +47,7 @@
 		<Unit filename="include/Test.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ArgumentParser.cpp" />
+		<Unit filename="src/Assertion.cpp" />
 		<Unit filename="src/Computer.cpp" />
 		<Unit filename="src/Debugger.cpp" />
 		<Unit filename="src/Disk.cpp" />

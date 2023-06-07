@@ -85,8 +85,45 @@ void run(Computer& computer) {
 
 // Put your tests here
 void register_tests(Tester& tester) {
-	tester.register_test("Can run",
-		[tester](Debugger::Instance& instance) {
-			std::cout << "Hello from test\n";
+	using namespace Debugger;
+
+	tester.register_test("0 != 0",
+		[tester](Instance& instance) {
+			Assertion<int> _test(0, Constraint::NotEqualTo, 0);
+		});
+
+	tester.register_test("0 != 1",
+		[tester](Instance& instance) {
+			Assertion<int> _test(0, Constraint::NotEqualTo, 1);
+		});
+
+	tester.register_test("0 == 0",
+		[tester](Instance& instance) {
+			Assertion<int> _test(0, Constraint::EqualTo, 0);
+		});
+
+	tester.register_test("0 == 1",
+		[tester](Instance& instance) {
+			Assertion<int> _test(0, Constraint::EqualTo, 1);
+		});
+
+	tester.register_test("false == false",
+		[tester](Instance& instance) {
+			Assertion<bool> _test(false, BoolConstraint::IsFalse);
+		});
+
+	tester.register_test("false == true",
+		[tester](Instance& instance) {
+			Assertion<bool> _test(false, BoolConstraint::IsTrue);
+		});
+
+	tester.register_test("true == false",
+		[tester](Instance& instance) {
+			Assertion<bool> _test(true, BoolConstraint::IsFalse);
+		});
+
+	tester.register_test("true == true",
+		[tester](Instance& instance) {
+			Assertion<bool> _test(true, BoolConstraint::IsTrue);
 		});
 }

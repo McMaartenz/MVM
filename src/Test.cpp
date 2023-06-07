@@ -14,11 +14,12 @@ void Tester::register_test(const std::string name, std::function<void(Debugger::
 
 void Tester::execute_tests() {
 	for (auto& test : tests) {
-		std::cout << time() << "++ Registered test: " << std::get<0>(test) << std::endl;
+		std::cout << time() << "[+] Registered test: " << std::get<0>(test) << std::endl;
 	}
 
-	std::cout << time() << "-- Starting tests\n";
+	std::cout << time() << "[i] Starting tests\n\n";
 
+	int success_amount = 0;
 	for (auto& test : tests) {
 		try {
 			RAMDisk disk(1024);
@@ -29,13 +30,17 @@ void Tester::execute_tests() {
 
 			auto fn = std::get<1>(test);
 			fn(instance);
+
+			success_amount++;
+			std::cout << time() << "[v] PASS - " << std::get<0>(test) << std::endl;
 		}
 		catch (const std::exception& e) {
-			std::cerr << time() << "!! Exception during test: " << std::get<0>(test) << ": " << e.what();
+			std::cout << time() << "[x] FAIL - " << std::get<0>(test) << " - " << e.what() << std::endl;
 		}
 	}
 
-	std::cout << time() << "-- End of tests\n";
+	std::cout << std::endl << time() << "[i] End of tests\n";
+	std::cout << time() << "[i] " << success_amount << "/" << tests.size() << " tests passed\n";
 }
 
 std::string Tester::time() {

@@ -1,6 +1,7 @@
 #ifndef TEST_H
 #define TEST_H
 
+#include <exception>
 #include <iostream>
 #include <vector>
 #include <tuple>
@@ -10,6 +11,7 @@
 
 #include "Debugger.h"
 #include "RAMDisk.h"
+#include "Assertion.h"
 
 class Tester {
 public:
