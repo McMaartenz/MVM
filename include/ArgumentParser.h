@@ -20,6 +20,6 @@ namespace ArgumentParser {
 	};
 
 	Parser* Initialize(int argc, char** argv);
-};
+}
 
 #endif // ARGUMENTPARSER_H

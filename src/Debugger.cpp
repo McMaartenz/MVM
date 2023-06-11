@@ -167,7 +167,7 @@ void print_reg(uint16_t value) {
 			  << "0b" << fmt_binary_string
 			  << "'" << static_cast<char>(char_1) << static_cast<char>(char_2) << "'"
 			  << " (" << std::dec << value << ")" << std::endl;
-};
+}
 
 void flag_print(uint8_t flag, const std::string name) {
 	if (flag) {
@@ -175,7 +175,7 @@ void flag_print(uint8_t flag, const std::string name) {
 	} else {
 		std::cout << "   ";
 	}
-};
+}
 
 uint32_t make_number(std::string& input) {
 	std::transform(input.begin(), input.end(), input.begin(),

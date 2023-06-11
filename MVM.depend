@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1686166085 source:d:\git\repos\mvm\main.cpp
+1686166240 source:d:\git\repos\mvm\main.cpp
 	<iostream>
 	<cstdlib>
 	<filesystem>
@@ -8,7 +8,7 @@
 	"Debugger.h"
 	"Test.h"
 
-1684406356 d:\git\repos\mvm\include\argumentparser.h
+1686478751 d:\git\repos\mvm\include\argumentparser.h
 	<iostream>
 	<algorithm>
 	<cstring>
@@ -72,7 +72,7 @@
 1684406356 source:d:\git\repos\mvm\src\computer.cpp
 	"Computer.h"
 
-1685992671 source:d:\git\repos\mvm\src\debugger.cpp
+1686478778 source:d:\git\repos\mvm\src\debugger.cpp
 	"Debugger.h"
 
 1685991372 source:d:\git\repos\mvm\src\disk.cpp
