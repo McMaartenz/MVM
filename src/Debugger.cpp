@@ -42,7 +42,16 @@ void Instance::run() {
 }
 
 void Instance::step() {
-	this->computer.tick();
+	std::vector<uint16_t>::iterator it = std::find(breakpoints.begin(),
+													breakpoints.end(),
+													computer.IP);
+	if (it != breakpoints.end()) {
+		steps = 0;
+		std::cout << "Breakpoint hit\n";
+		return;
+	}
+
+	computer.tick();
 }
 
 void Instance::handle_command(const std::string& command) {
@@ -54,6 +63,43 @@ void Instance::handle_command(const std::string& command) {
 					for (const auto& command : commands) {
 						std::cout << command.first << " - " << std::get<0>(command.second) << std::endl;
 					}
+				}
+			}
+		},
+		{
+			"b", { "[address] Break when IP hits this address", [this, &args]() {
+					uint16_t breakpoint = (uint16_t)make_number(args.at(1));
+					if (std::find(breakpoints.begin(), breakpoints.end(), breakpoint) != breakpoints.end())
+					{
+						std::cout << "A breakpoint already lies at this address\n";
+						return;
+					}
+
+					breakpoints.push_back(breakpoint);
+					std::cout << "Breakpoint put at [0x" << std::setfill('0') << std::setw(4) << std::hex << breakpoint << "]\n";
+				}
+			}
+		},
+		{
+			"bl", { "List breakpoints", [this]() {
+					for (uint16_t breakpoint : breakpoints) {
+						std::cout << "0x" << std::setfill('0') << std::setw(4) << std::hex << breakpoint << std::endl;
+					}
+				}
+			}
+		},
+		{
+			"rb", { "[address] Remove breakpoint at address", [this, &args]() {
+					uint16_t breakpoint = (uint16_t)make_number(args.at(1));
+
+					std::vector<uint16_t>::iterator it = std::find(breakpoints.begin(), breakpoints.end(), breakpoint);
+					if (it == breakpoints.end()) {
+						std::cout << "No such breakpoint at specified address\n";
+						return;
+					}
+
+					breakpoints.erase(it);
+					std::cout << "Breakpoint removed\n";
 				}
 			}
 		},
@@ -85,31 +131,40 @@ void Instance::handle_command(const std::string& command) {
 			"goto", {"[address] Jump to specified address", [this, &args]() {
 					computer.IP = (uint16_t)make_number(args.at(1));
 					std::cout << "IP";
-					print_reg(computer.IP);
+					pretty_16(computer.IP);
 				}
 			}
 		},
 		{
 			"reg", {"Display CPU registers", [this]() {
 					std::cout << "IP";
-					print_reg(computer.IP);
+					pretty_16(computer.IP);
 					std::cout << "SP";
-					print_reg(computer.SP);
+					pretty_16(computer.SP);
 					std::cout << "AX";
-					print_reg(computer.AX);
+					pretty_16(computer.AX);
 					std::cout << "BX";
-					print_reg(computer.BX);
+					pretty_16(computer.BX);
 					std::cout << "CX";
-					print_reg(computer.CX);
+					pretty_16(computer.CX);
 					std::cout << "DX";
-					print_reg(computer.DX);
+					pretty_16(computer.DX);
 					std::cout << "EX";
-					print_reg(computer.EX);
+					pretty_16(computer.EX);
 					std::cout << "FL ";
 					flag_print(computer.ZF, "ZF");
 					flag_print(computer.CF, "CF");
 					flag_print(computer.SF, "SF");
 					flag_print(computer.IF, "IF");
+				}
+			}
+		},
+		{
+			"r", { "[address] Inspect memory at specified address", [this, &args]() {
+					uint32_t address = make_number(args.at(1));
+
+					uint8_t byte = computer.memory->get(address);
+					pretty_8(byte);
 				}
 			}
 		}
@@ -152,7 +207,7 @@ void Instance::handle_command(const std::string& command) {
 	}
 }
 
-void print_reg(uint16_t value) {
+void pretty_16(uint16_t value) {
 	std::bitset<16> bits(value);
 	std::string binary_string = bits.to_string();
 	std::string fmt_binary_string;
@@ -167,6 +222,21 @@ void print_reg(uint16_t value) {
 	std::cout << " 0x" << std::setfill('0') << std::setw(4) << std::hex << value << " "
 			  << "0b" << fmt_binary_string
 			  << "'" << static_cast<char>(char_1) << static_cast<char>(char_2) << "'"
+			  << " (" << std::dec << value << ")" << std::endl;
+}
+
+void pretty_8(uint8_t value) {
+	std::bitset<8> bits(value);
+	std::string binary_string = bits.to_string();
+	std::string fmt_binary_string;
+
+	for (size_t i = 0; i < binary_string.size(); i += 4) {
+		fmt_binary_string += binary_string.substr(i, 4) + " ";
+	}
+
+	std::cout << " 0x" << std::setfill('0') << std::setw(2) << std::hex << (uint16_t)value << " "
+			  << "0b" << fmt_binary_string
+			  << "'" << static_cast<char>(value) << "'"
 			  << " (" << std::dec << value << ")" << std::endl;
 }
 
