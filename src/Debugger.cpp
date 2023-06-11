@@ -164,7 +164,17 @@ void Instance::handle_command(const std::string& command) {
 					uint32_t address = make_number(args.at(1));
 
 					uint8_t byte = computer.memory->get(address);
-					pretty_8(byte);
+					std::cout << "[0x" << std::setfill('0') << std::setw(4) << std::hex << address << "] "; pretty_8(byte);
+				}
+			}
+		},
+		{
+			"w", { "[address] [byte] Overwrite memory at specified address", [this, &args]() {
+					uint32_t address = make_number(args.at(1));
+					uint8_t new_byte = (uint8_t)make_number(args.at(2));
+
+					computer.memory->set(address, new_byte);
+					std::cout << "[0x" << std::setfill('0') << std::setw(4) << std::hex << address << "] "; pretty_8(new_byte);
 				}
 			}
 		}
@@ -237,7 +247,7 @@ void pretty_8(uint8_t value) {
 	std::cout << " 0x" << std::setfill('0') << std::setw(2) << std::hex << (uint16_t)value << " "
 			  << "0b" << fmt_binary_string
 			  << "'" << static_cast<char>(value) << "'"
-			  << " (" << std::dec << value << ")" << std::endl;
+			  << " (" << std::dec << (uint16_t)value << ")" << std::endl;
 }
 
 void flag_print(uint8_t flag, const std::string name) {
