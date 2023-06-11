@@ -20,7 +20,7 @@
 	"Opcodes.h"
 	"Port.h"
 
-1684406356 d:\git\repos\mvm\include\memory.h
+1686483905 d:\git\repos\mvm\include\memory.h
 	<cstdint>
 	<cstring>
 	<vector>
@@ -44,11 +44,12 @@
 	<functional>
 	<iostream>
 
-1686481571 d:\git\repos\mvm\include\debugger.h
+1686483983 d:\git\repos\mvm\include\debugger.h
 	<iostream>
 	<iomanip>
 	<bitset>
 	<algorithm>
+	"Memory.h"
 	"Computer.h"
 
 1686166136 d:\git\repos\mvm\include\test.h
@@ -72,13 +73,13 @@
 1686482472 source:d:\git\repos\mvm\src\computer.cpp
 	"Computer.h"
 
-1686482063 source:d:\git\repos\mvm\src\debugger.cpp
+1686484152 source:d:\git\repos\mvm\src\debugger.cpp
 	"Debugger.h"
 
 1685991372 source:d:\git\repos\mvm\src\disk.cpp
 	"Disk.h"
 
-1684406356 source:d:\git\repos\mvm\src\memory.cpp
+1686484097 source:d:\git\repos\mvm\src\memory.cpp
 	"Memory.h"
 
 1684406356 source:d:\git\repos\mvm\src\opcodes.cpp

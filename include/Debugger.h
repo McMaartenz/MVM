@@ -6,6 +6,7 @@
 #include <bitset>
 #include <algorithm>
 
+#include "Memory.h"
 #include "Computer.h"
 
 namespace Debugger {

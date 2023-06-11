@@ -184,6 +184,29 @@ void Instance::handle_command(const std::string& command) {
 					std::cout << "Reloaded from disk and reset\n";
 				}
 			}
+		},
+		{
+			"dmp", { "Perform dump of current state. Includes registers and RAM", [this]() {
+					std::ofstream dmp_file;
+					dmp_file.open("computer.dmp", std::ios::binary);
+					if (!dmp_file.is_open()) {
+						std::cout << "Could not dump file: unable to open file for writing\n";
+						return;
+					}
+
+					// TODO print current registers, make them a std::string return instead of printing
+					uint32_t memory_size = computer.memory->memory_size;
+					uint8_t* dumped = new uint8_t[memory_size];
+
+					computer.memory->read_buffer(0, dumped, memory_size);
+					dmp_file.write((const char*)dumped, memory_size);
+
+					delete[] dumped;
+
+					dmp_file.close();
+					std::cout << "Dumped current state to computer.dmp\n";
+				}
+			}
 		}
 	};
 
