@@ -177,6 +177,13 @@ void Instance::handle_command(const std::string& command) {
 					std::cout << pretty_address(address) << " "; pretty_8(new_byte);
 				}
 			}
+		},
+		{
+			"reset", { "Reload diskfile into RAM and resets computer", [this]() {
+					computer.boot();
+					std::cout << "Reloaded from disk and reset\n";
+				}
+			}
 		}
 	};
 
