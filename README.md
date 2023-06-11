@@ -6,7 +6,20 @@ The default program accepts an input.
 - If this is anything else, it halts with no further output.  
 
 # Building
-I have built this using Code::Blocks. If you were to try to compile this, be sure to use C++17 STD.
+Requires C++17. Built with TDMGCC using MinGW on Windows. Other flags: `-Wall -fexceptions -g -std=gnu++17`.  
+
+# Running
+Flags:  
+  -m [bytes]  
+    Use given bytes as memory size  
+  -f [path/to/file]  
+    Use given diskfile as startup disk  
+  -s  
+    Enable serial port on IO[0x0000] and connect to STD IN/OUT  
+  -d  
+    Start with debugger terminal interaction  
+  -t  
+    Run tests defined in `main.cpp:register_tests(Tester&)`  
 
 # Opcodes
 Format of an instruction:  
