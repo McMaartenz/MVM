@@ -29,6 +29,11 @@ public:
 	void handle_command(const std::string& command);
 };
 
+std::string pretty_address(uint16_t address);
+
+template <int width>
+std::string pretty_hex(uint32_t value);
+
 void pretty_16(uint16_t value);
 void pretty_8(uint8_t value);
 

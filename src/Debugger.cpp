@@ -31,13 +31,13 @@ void Instance::run() {
 	step();
 	if (steps != -1 && --steps <= 0) {
 		inputting = true;
-		std::cout << "Paused execution at IP=" << std::hex << computer.IP;
+		std::cout << "Paused execution at " << pretty_address(computer.IP);
 		return;
 	}
 
 	if (!computer.running) {
 		inputting = true;
-		std::cout << "Computer halted at IP=" << std::hex << computer.IP;
+		std::cout << "Computer halted at " << pretty_address(computer.IP);
 	}
 }
 
@@ -76,14 +76,14 @@ void Instance::handle_command(const std::string& command) {
 					}
 
 					breakpoints.push_back(breakpoint);
-					std::cout << "Breakpoint put at [0x" << std::setfill('0') << std::setw(4) << std::hex << breakpoint << "]\n";
+					std::cout << "Breakpoint put at " << pretty_address(breakpoint) << std::endl;
 				}
 			}
 		},
 		{
 			"bl", { "List breakpoints", [this]() {
 					for (uint16_t breakpoint : breakpoints) {
-						std::cout << "0x" << std::setfill('0') << std::setw(4) << std::hex << breakpoint << std::endl;
+						std::cout << pretty_hex<4>(breakpoint) << std::endl;
 					}
 				}
 			}
@@ -137,19 +137,19 @@ void Instance::handle_command(const std::string& command) {
 		},
 		{
 			"reg", {"Display CPU registers", [this]() {
-					std::cout << "IP";
+					std::cout << "IP ";
 					pretty_16(computer.IP);
-					std::cout << "SP";
+					std::cout << "SP ";
 					pretty_16(computer.SP);
-					std::cout << "AX";
+					std::cout << "AX ";
 					pretty_16(computer.AX);
-					std::cout << "BX";
+					std::cout << "BX ";
 					pretty_16(computer.BX);
-					std::cout << "CX";
+					std::cout << "CX ";
 					pretty_16(computer.CX);
-					std::cout << "DX";
+					std::cout << "DX ";
 					pretty_16(computer.DX);
-					std::cout << "EX";
+					std::cout << "EX ";
 					pretty_16(computer.EX);
 					std::cout << "FL ";
 					flag_print(computer.ZF, "ZF");
@@ -164,7 +164,7 @@ void Instance::handle_command(const std::string& command) {
 					uint32_t address = make_number(args.at(1));
 
 					uint8_t byte = computer.memory->get(address);
-					std::cout << "[0x" << std::setfill('0') << std::setw(4) << std::hex << address << "] "; pretty_8(byte);
+					std::cout << pretty_address(address) << " "; pretty_8(byte);
 				}
 			}
 		},
@@ -174,7 +174,7 @@ void Instance::handle_command(const std::string& command) {
 					uint8_t new_byte = (uint8_t)make_number(args.at(2));
 
 					computer.memory->set(address, new_byte);
-					std::cout << "[0x" << std::setfill('0') << std::setw(4) << std::hex << address << "] "; pretty_8(new_byte);
+					std::cout << pretty_address(address) << " "; pretty_8(new_byte);
 				}
 			}
 		}
@@ -217,6 +217,19 @@ void Instance::handle_command(const std::string& command) {
 	}
 }
 
+std::string pretty_address(uint16_t address) {
+	std::stringstream ss;
+	ss << "[" << pretty_hex<4>(address) << "]";
+	return ss.str();
+}
+
+template <int width>
+std::string pretty_hex(uint32_t value) {
+	std::stringstream ss;
+	ss << "0x" << std::setfill('0') << std::setw(width) << std::hex << value;
+	return ss.str();
+}
+
 void pretty_16(uint16_t value) {
 	std::bitset<16> bits(value);
 	std::string binary_string = bits.to_string();
@@ -229,7 +242,7 @@ void pretty_16(uint16_t value) {
 	uint8_t char_1 = static_cast<uint8_t>((value & 0xFF00) >> 8);
 	uint8_t char_2 = static_cast<uint8_t>(value & 0x00FF);
 
-	std::cout << " 0x" << std::setfill('0') << std::setw(4) << std::hex << value << " "
+	std::cout << pretty_hex<4>(value) << " "
 			  << "0b" << fmt_binary_string
 			  << "'" << static_cast<char>(char_1) << static_cast<char>(char_2) << "'"
 			  << " (" << std::dec << value << ")" << std::endl;
@@ -244,7 +257,7 @@ void pretty_8(uint8_t value) {
 		fmt_binary_string += binary_string.substr(i, 4) + " ";
 	}
 
-	std::cout << " 0x" << std::setfill('0') << std::setw(2) << std::hex << (uint16_t)value << " "
+	std::cout << pretty_hex<2>((uint16_t)value) << " "
 			  << "0b" << fmt_binary_string
 			  << "'" << static_cast<char>(value) << "'"
 			  << " (" << std::dec << (uint16_t)value << ")" << std::endl;

@@ -97,7 +97,7 @@ void Computer::tick() {
 		}
 
 		default: {
-			std::cout << "[!] Illegal instruction IP=" << std::hex << IP << std::endl;
+			std::cout << "[!] Illegal instruction at IP=" << std::hex << IP << std::endl;
 			return; // TODO: illegal instruction interrupt
 		}
 		}
@@ -122,7 +122,7 @@ void Computer::tick() {
 	}
 
 	default: {
-		std::cout << "[!] Unknown instruction IP=" << std::hex << IP << std::endl;
+		std::cout << "[!] Unknown instruction at IP=" << std::hex << IP << std::endl;
 		break;
 	}
 	}
