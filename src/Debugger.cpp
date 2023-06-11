@@ -29,7 +29,7 @@ Instance::~Instance() {
 
 void Instance::run() {
 	step();
-	if (--steps <= 0) {
+	if (steps != -1 && --steps <= 0) {
 		inputting = true;
 		std::cout << "Paused execution at IP=" << std::hex << computer.IP;
 		return;
@@ -61,6 +61,7 @@ void Instance::handle_command(const std::string& command) {
 			"c", {"Continues execution", [this]() {
 					computer.running = true;
 					inputting = false;
+					steps = -1;
 				}
 			}
 		},
